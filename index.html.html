@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+!DOCTYPE html>
 <html lang="es">
 <head>
 <meta charset="UTF-8">
@@ -402,7 +402,7 @@ ${summary}
 Respondé SOLO con JSON puro (sin markdown ni backticks):
 {"titulo":"Nombre del perfil vocacional","subtitulo":"Frase que capture la esencia laboral","descripcion":"3 párrafos en segunda persona separados por \\n\\n","areas":["5 a 7 áreas vocacionales concretas"],"fortalezas":["5 fortalezas laborales en segunda persona"],"desafios":["4 desafíos con empatía"]}`;
   try{
-    const res=await fetch("https://api.anthropic.com/v1/messages",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({model:"claude-sonnet-4-20250514",max_tokens:1000,messages:[{role:"user",content:prompt}]})});
+    const res=await fetch("/.netlify/functions/analyze",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({prompt,max_tokens:1000})});
     const data=await res.json();
     const r=JSON.parse(data.content.map(c=>c.text||'').join('').replace(/```json|```/g,'').trim());
     goTo('screen-result');
@@ -509,7 +509,7 @@ Generá un análisis profundo y personalizado. Respondé SOLO con JSON puro (sin
 {"analisis":"3 párrafos sobre la personalidad en segunda persona, incorporando el tipo secundario si es relevante. Separados por \\n\\n","areas":["6 a 8 áreas vocacionales muy específicas y concretas"],"fortalezas":["5 fortalezas específicas del tipo en segunda persona"],"desafios":["4 desafíos de crecimiento formulados con empatía"]}`;
 
   try{
-    const res=await fetch("https://api.anthropic.com/v1/messages",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({model:"claude-sonnet-4-20250514",max_tokens:1200,messages:[{role:"user",content:prompt}]})});
+    const res=await fetch("/.netlify/functions/analyze",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({prompt,max_tokens:1200})});
     const data=await res.json();
     const r=JSON.parse(data.content.map(c=>c.text||'').join('').replace(/```json|```/g,'').trim());
     goTo('screen-enea-result');
