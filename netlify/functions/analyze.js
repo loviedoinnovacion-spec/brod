@@ -9,24 +9,71 @@ exports.handler = async (event) => {
       body: ""
     };
   }
-  const { prompt, max_tokens } = JSON.parse(event.body);
-  const response = await fetch("https://api.anthropic.com/v1/messages", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "x-api-key": process.env.ANTHROPIC_API_KEY,
-      "anthropic-version": "2023-06-01"
-    },
-    body: JSON.stringify({
-      model: "claude-sonnet-4-20250514",
-      max_tokens: max_tokens || 1000,
-      messages: [{ role: "user", content: prompt }]
-    })
-  });
-  const data = await response.json();
-  return {
-    statusCode: 200,
-    headers: { "Access-Control-Allow-Origin": "*" },
-    body: JSON.stringify(data)
-  };
+
+  const body = JSON.parse(event.body);
+
+  // Si es una llamada de IA
+  if (body.prompt) {
+    const response = await fetch("https://api.anthropic.com/v1/messages", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "x-api-key": process.env.ANTHROPIC_API_KEY,
+        "anthropic-version": "2023-06-01"
+      },
+      body: JSON.stringify({
+        model: "claude-sonnet-4-20250514",
+        max_tokens: body.max_tokens || 1000,
+        messages: [{ role: "user", content: body.prompt }]
+      })
+    });
+    const data = await response.json();
+    return {
+      statusCode: 200,
+      headers: { "Access-Control-Allow-Origin": "*" },
+      body: JSON.stringify(data)
+    };
+  }
+
+  // Si es guardar en Airtable
+  if (body.guardar) {
+    const d = body.guardar;
+    const nac = new Date(d.fecha);
+    const edad = Math.floor((Date.now() - nac) / (1000 * 60 * 60 * 24 * 365.25));
+
+    const response = await fetch(
+      `https://api.airtable.com/v0/appU6FgViscyxhJSO/tbl7l56KwRXtY8xR2`,
+      {
+        method: "POST",
+        headers: {
+          "Authorization": `Bearer ${process.env.AIRTABLE_TOKEN}`,
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          records: [{
+            fields: {
+              "Nombre": d.nombre,
+              "Sexo": d.sexo,
+              "Fecha nacimiento": d.fecha,
+              "Edad": edad,
+              "Localidad": d.localidad,
+              "Estado civil": d.civil,
+              "Situacion": d.situacion,
+              "Herramienta": d.herramienta,
+              "Perfil": d.perfil,
+              "Fecha y hora": new Date().toLocaleString("es-AR")
+            }
+          }]
+        })
+      }
+    );
+    const data = await response.json();
+    return {
+      statusCode: 200,
+      headers: { "Access-Control-Allow-Origin": "*" },
+      body: JSON.stringify(data)
+    };
+  }
+
+  return { statusCode: 400, body: "Bad request" };
 };
