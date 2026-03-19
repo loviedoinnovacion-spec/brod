@@ -758,4 +758,7 @@ function descargarPDF(tipo){
   window.print();
 }
 
-function restart(){vAnswers=new Array(VQUESTIONS.length).fill(null);eneaAnswers=Array
+function restart(){vAnswers=new Array(VQUESTIONS.length).fill(null);eneaAnswers=Array(45).fill(null);userData={};['f-nombre','f-localidad','f-email'].forEach(id=>document.getElementById(id).value='');['f-sexo','f-fecha','f-situacion'].forEach(id=>document.getElementById(id).value='');goTo('screen-intro');}
+</script>
+</body>
+</html>
