@@ -86,7 +86,7 @@ body::after { content: ''; position: fixed; inset: 0; background-image: url("dat
 
 .intro-title { font-family: 'Playfair Display', serif; font-size: clamp(52px, 9vw, 96px); font-weight: 900; line-height: 1.0; margin-bottom: 24px; color: var(--ink); position: relative; z-index: 1; }
 .intro-title span { color: var(--blue); position: relative; display: inline-block; }
-.intro-title span::after { content: ''; position: absolute; bottom: 4px; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--blue), var(--enea)); transform: scaleX(0); transform-origin: left; transition: transform 0.6s cubic-bezier(0.16,1,0.3,1) 0.5s; }
+.intro-title span::after { display: none; }
 .screen.active .intro-title span::after { transform: scaleX(1); }
 
 .intro-sub { font-size: 17px; font-weight: 300; color: var(--muted); max-width: 480px; line-height: 1.7; margin-bottom: 48px; position: relative; z-index: 1; }
@@ -301,8 +301,8 @@ body::after { content: ''; position: fixed; inset: 0; background-image: url("dat
     <span class="logo-name">Brechas y Oportunidades Digitales</span>
   </div>
   <div class="intro-eyebrow anim-fadeup-2">Herramientas de desarrollo personal</div>
-  <h1 class="intro-title anim-fadeup-3">Explorá tu<br><span>potencial</span></h1>
-  <p class="intro-sub anim-fadeup-4">Respondé algunas preguntas y accedé a herramientas diseñadas por Espacio BrOD para conocerte mejor y orientar tu desarrollo profesional.</p>
+  <h1 class="intro-title anim-fadeup-3">Quién. Qué. <span>Vos.</span></h1>
+  <p class="intro-sub anim-fadeup-4">Dos herramientas para entenderte mejor y orientar tu desarrollo profesional.</p>
 
   <button class="btn-primary anim-fadeup-5" onclick="goTo('screen-datos')">Comenzar →</button>
   <div class="intro-copyright anim-fadeup-5">
