@@ -313,9 +313,9 @@ body::after { content: ''; position: fixed; inset: 0; background-image: url("dat
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
         brod.consultora
       </a>
-      <a href="mailto:brod.brechas@gmail.com" style="color:var(--blue);text-decoration:none;font-weight:500;display:inline-flex;align-items:center;gap:6px;">
+      <a href="/cdn-cgi/l/email-protection#debcacb1baf0bcacbbbdb6bfad9eb9b3bfb7b2f0bdb1b3" style="color:var(--blue);text-decoration:none;font-weight:500;display:inline-flex;align-items:center;gap:6px;">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2,4 12,13 22,4"/></svg>
-        brod.brechas@gmail.com
+        <span class="__cf_email__" data-cfemail="9dffeff2f9b3ffeff8fef5fceeddfaf0fcf4f1b3fef2f0">[email&#160;protected]</span>
       </a>
     </span>
   </div>
@@ -350,7 +350,7 @@ body::after { content: ''; position: fixed; inset: 0; background-image: url("dat
     <h2 class="eleccion-saludo anim-fadeup-2" id="eleccion-saludo">¡Hola!</h2>
     <p class="eleccion-sub anim-fadeup-3">¿Qué querés explorar hoy? Elegí la herramienta que más se adapte a lo que buscás.</p>
     <div class="herramientas-grid anim-fadeup-3">
-      <div class="herramienta-card" onclick="startVocacional()">
+      <div class="herramienta-card" onclick="goTo('screen-intro-voc')">
         <div class="hcard-accent"></div>
         <span class="hcard-icon">🧭</span>
         <span class="hcard-tag">Orientación laboral</span>
@@ -358,7 +358,7 @@ body::after { content: ''; position: fixed; inset: 0; background-image: url("dat
         <div class="hcard-desc">Para quienes buscan orientación sobre qué carreras, trabajos o actividades se adaptan mejor a su forma de ser, sus intereses y sus fortalezas naturales.</div>
         <div class="hcard-cta">Comenzar test <span class="hcard-arrow">→</span> 24 preguntas</div>
       </div>
-      <div class="herramienta-card enea" onclick="startEneagrama()">
+      <div class="herramienta-card enea" onclick="goTo('screen-intro-enea')">
         <div class="hcard-accent"></div>
         <span class="hcard-icon">🔮</span>
         <span class="hcard-tag">Autoconocimiento</span>
@@ -368,6 +368,60 @@ body::after { content: ''; position: fixed; inset: 0; background-image: url("dat
       </div>
     </div>
     <button class="btn-secondary anim-fadeup-4" onclick="goTo('screen-datos')">← Modificar mis datos</button>
+  </div>
+</div>
+
+<!-- INTRO VOCACIONAL -->
+<div id="screen-intro-voc" class="screen">
+  <div class="datos-wrap" style="max-width:600px;">
+    <div class="step-eyebrow anim-fadeup">— Perfil Vocacional · Método</div>
+    <h2 class="section-title anim-fadeup-2">¿Cómo funciona este test?</h2>
+    <p class="section-sub anim-fadeup-3">Antes de empezar, leé esto:</p>
+    <div style="display:flex;flex-direction:column;gap:16px;margin-bottom:32px;" class="anim-fadeup-3">
+      <div style="background:var(--white);border:1px solid var(--border);border-left:4px solid var(--blue);padding:20px 24px;">
+        <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:var(--blue2);margin-bottom:8px;">El modelo Holland / RIASEC</div>
+        <p style="font-size:14px;font-weight:300;color:var(--ink2);line-height:1.7;">Este test está basado en el modelo de orientación vocacional de John Holland, uno de los más utilizados a nivel mundial. Identifica seis dimensiones de intereses y fortalezas laborales: <strong>Realista, Investigador, Artístico, Social, Emprendedor y Convencional</strong>.</p>
+      </div>
+      <div style="background:var(--white);border:1px solid var(--border);border-left:4px solid var(--blue);padding:20px 24px;">
+        <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:var(--blue2);margin-bottom:8px;">Cómo responder</div>
+        <p style="font-size:14px;font-weight:300;color:var(--ink2);line-height:1.7;">No hay respuestas correctas ni incorrectas. En cada pregunta elegí la opción que mejor refleje tu forma natural de ser, lo que genuinamente preferís o te genera más entusiasmo. <strong>Respondé con honestidad, sin pensar en lo que "debería" ser.</strong></p>
+      </div>
+      <div style="background:var(--white);border:1px solid var(--border);border-left:4px solid var(--blue);padding:20px 24px;">
+        <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:var(--blue2);margin-bottom:8px;">Qué vas a obtener</div>
+        <p style="font-size:14px;font-weight:300;color:var(--ink2);line-height:1.7;">Al finalizar las 24 preguntas, la IA analizará tu perfil RIASEC y generará una descripción personalizada con tus áreas vocacionales afines, fortalezas laborales y desafíos de crecimiento.</p>
+      </div>
+    </div>
+    <div style="display:flex;gap:12px;flex-wrap:wrap;" class="anim-fadeup-4">
+      <button class="btn-secondary" onclick="goTo('screen-eleccion')">← Volver</button>
+      <button class="btn-primary" onclick="iniciarVocacional()">Comenzar test →</button>
+    </div>
+  </div>
+</div>
+
+<!-- INTRO ENEAGRAMA -->
+<div id="screen-intro-enea" class="screen">
+  <div class="datos-wrap" style="max-width:600px;">
+    <div class="step-eyebrow anim-fadeup">— Eneagrama · Método</div>
+    <h2 class="section-title anim-fadeup-2">¿Cómo funciona este test?</h2>
+    <p class="section-sub anim-fadeup-3">Antes de empezar, leé esto:</p>
+    <div style="display:flex;flex-direction:column;gap:16px;margin-bottom:32px;" class="anim-fadeup-3">
+      <div style="background:var(--white);border:1px solid var(--border);border-left:4px solid var(--enea);padding:20px 24px;">
+        <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:var(--enea);margin-bottom:8px;">El modelo Eneagrama</div>
+        <p style="font-size:14px;font-weight:300;color:var(--ink2);line-height:1.7;">El eneagrama es una herramienta de autoconocimiento que describe <strong>9 tipos de personalidad</strong>, cada uno con motivaciones profundas, miedos centrales y formas características de relacionarse con el mundo. No clasifica conductas superficiales sino estructuras internas.</p>
+      </div>
+      <div style="background:var(--white);border:1px solid var(--border);border-left:4px solid var(--enea);padding:20px 24px;">
+        <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:var(--enea);margin-bottom:8px;">Cómo responder</div>
+        <p style="font-size:14px;font-weight:300;color:var(--ink2);line-height:1.7;">Vas a ver 45 afirmaciones divididas en 9 bloques. Para cada una, indicá <strong>del 1 al 5</strong> qué tan identificado/a te sentís: 1 = "Nada que ver conmigo" y 5 = "Muy yo". Respondé según cómo sos en general, no en un momento puntual.</p>
+      </div>
+      <div style="background:var(--white);border:1px solid var(--border);border-left:4px solid var(--enea);padding:20px 24px;">
+        <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:var(--enea);margin-bottom:8px;">Qué vas a obtener</div>
+        <p style="font-size:14px;font-weight:300;color:var(--ink2);line-height:1.7;">Al finalizar, la IA identificará tu tipo principal y secundario, y generará un análisis profundo con orientación vocacional, fortalezas y áreas de crecimiento personalizadas.</p>
+      </div>
+    </div>
+    <div style="display:flex;gap:12px;flex-wrap:wrap;" class="anim-fadeup-4">
+      <button class="btn-secondary" onclick="goTo('screen-eleccion')">← Volver</button>
+      <button class="btn-primary" style="background:var(--enea);" onclick="iniciarEneagrama()">Comenzar test →</button>
+    </div>
   </div>
 </div>
 
@@ -423,6 +477,7 @@ body::after { content: ''; position: fixed; inset: 0; background-image: url("dat
     <div class="result-section"><div class="section-label">— Áreas vocacionales afines</div><div class="areas-grid" id="result-areas"></div></div>
     <div class="result-section"><div class="section-label">— Fortalezas laborales</div><div class="strengths-list" id="result-strengths"></div></div>
     <div class="result-section"><div class="section-label">— Desafíos a trabajar</div><div class="challenges-list" id="result-challenges"></div></div>
+    <div class="result-section"><div class="section-label">— Tu perfil RIASEC</div><div class="scores-grid" id="result-riasec"></div></div>
     <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:16px;">
       <button class="btn-secondary" onclick="restart()">↺ Volver a empezar</button>
       <button class="btn-secondary" onclick="goTo('screen-eleccion')">← Otras herramientas</button>
@@ -460,7 +515,7 @@ body::after { content: ''; position: fixed; inset: 0; background-image: url("dat
 <div id="pdf-content" style="display:none;"></div>
 </div>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 function goTo(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');window.scrollTo(0,0);}
 
 let userData={};
@@ -473,36 +528,53 @@ function validarDatos(){
   goTo('screen-eleccion');
 }
 
+// ── DIMENSIONES RIASEC ──
+// R=Realista, I=Investigador, A=Artístico, S=Social, E=Emprendedor, C=Convencional
+// Cada pregunta tiene 4 opciones mapeadas a dimensiones: [opt0, opt1, opt2, opt3]
 const VQUESTIONS=[
-  {cat:"Actividades prácticas",text:"¿Qué preferís hacer en tu tiempo libre?",opts:["Arreglar o construir cosas con las manos","Leer o estudiar sobre temas que me interesan","Organizar eventos o salidas con amigos","Crear algo artístico o expresivo"]},
-  {cat:"Entorno de trabajo",text:"¿En qué tipo de entorno te sentís más cómodo/a trabajando?",opts:["Al aire libre o en espacios físicos activos","En un laboratorio o lugar de experimentación","En una oficina con personas y reuniones","En un estudio creativo o lugar con libertad visual"]},
-  {cat:"Herramientas",text:"Si tuvieras que aprender algo nuevo mañana, ¿qué elegirías?",opts:["Usar una herramienta o maquinaria nueva","Programar o analizar datos","Hablar en público o negociar","Dibujar, fotografiar o diseñar"]},
-  {cat:"Resolución de problemas",text:"Frente a un problema, ¿cuál es tu primer impulso?",opts:["Busco soluciones concretas y las ejecuto","Investigo y analizo antes de actuar","Consulto con otros y busco consenso","Improviso y confío en mi intuición"]},
-  {cat:"Curiosidad intelectual",text:"¿Qué tipo de preguntas te generan más entusiasmo?",opts:["¿Cómo funciona esto exactamente?","¿Por qué las personas actúan así?","¿Cómo podemos organizarnos mejor?","¿Cómo se puede expresar esta idea?"]},
-  {cat:"Aprendizaje",text:"¿Cómo preferís aprender algo nuevo?",opts:["Experimentando y probando yo mismo/a","Leyendo teoría y profundizando conceptos","Aprendiendo en grupo o con un mentor","A través de ejemplos visuales o narrativos"]},
-  {cat:"Proyectos",text:"¿Qué tipo de proyecto te motivaría más?",opts:["Diseñar un sistema técnico o mecánico","Investigar un fenómeno natural o social","Coordinar un equipo para un objetivo común","Producir una obra o contenido creativo"]},
-  {cat:"Trabajo intelectual",text:"Cuando leés o estudiás, ¿qué te resulta más satisfactorio?",opts:["Entender cómo funciona algo paso a paso","Llegar a conclusiones después de mucho análisis","Aplicar lo aprendido con otras personas","Imaginar posibilidades nuevas a partir de lo que leo"]},
-  {cat:"Expresión personal",text:"¿Cómo expresás mejor lo que sentís o pensás?",opts:["A través de acciones concretas","Con argumentos y datos","Hablando y conectando con otros","Con imágenes, música, escritura o diseño"]},
-  {cat:"Creatividad",text:"¿Qué valorás más en un trabajo?",opts:["Que sea útil y tenga impacto real","Que sea riguroso e intelectualmente desafiante","Que implique colaboración y relaciones humanas","Que me dé libertad para ser creativo/a"]},
-  {cat:"Estética",text:"¿Cuál de estas actividades disfrutarías más?",opts:["Construir o reparar algo físico","Analizar datos para encontrar patrones","Liderar una reunión o presentación","Escribir, ilustrar o componer algo propio"]},
-  {cat:"Ambigüedad",text:"¿Cómo te sentís frente a situaciones abiertas, sin una respuesta clara?",opts:["Me genera ansiedad, prefiero instrucciones claras","Me interesa encontrar la respuesta correcta","Prefiero decidir en conjunto","Me entusiasma, disfruto explorar"]},
-  {cat:"Relaciones interpersonales",text:"¿Qué rol solés tener en un grupo?",opts:["El que hace y ejecuta las tareas","El que piensa y analiza la situación","El que organiza y sostiene al grupo","El que propone ideas nuevas o diferentes"]},
-  {cat:"Motivación social",text:"¿Qué te hace sentir que tu trabajo tiene sentido?",opts:["Ver resultados concretos y tangibles","Que el análisis que hice fue correcto","Que ayudé a alguien o mejoré algo para otros","Que creé algo que impacta o emociona"]},
-  {cat:"Comunicación",text:"¿Cómo preferís comunicarte en el trabajo?",opts:["Con instrucciones claras y directas","Con informes detallados y bien fundamentados","En conversaciones fluidas y empáticas","A través de presentaciones o recursos visuales"]},
-  {cat:"Impacto",text:"Si pudieras elegir, ¿cuál sería tu contribución ideal al mundo?",opts:["Construir infraestructura o soluciones físicas","Generar conocimiento o descubrimientos","Mejorar la vida de personas o comunidades","Crear cultura, arte o experiencias"]},
-  {cat:"Liderazgo",text:"¿Cómo te relacionás con el liderazgo?",opts:["Prefiero ejecutar tareas bien definidas","Prefiero liderar desde el conocimiento técnico","Me siento cómodo/a guiando e inspirando equipos","Lidero desde la visión y la originalidad"]},
-  {cat:"Riesgo",text:"¿Cómo te sentís frente a la incertidumbre y el riesgo?",opts:["Prefiero entornos estables y predecibles","Analizo el riesgo antes de decidir","Confío en el equipo para navegarlo","Me motiva, es donde me siento vivo/a"]},
-  {cat:"Objetivos",text:"¿Cuál de estos objetivos profesionales te moviliza más?",opts:["Dominar un oficio o habilidad técnica","Convertirme en referente en mi área","Generar cambio social o comunitario","Crear algo innovador desde cero"]},
-  {cat:"Decisiones",text:"¿Cómo tomás decisiones importantes?",opts:["Con criterios prácticos y concretos","Con análisis de datos y evidencia","Considerando el impacto en las personas","Confío en mi intuición y visión"]},
-  {cat:"Organización",text:"¿Cómo describís tu forma de organizarte?",opts:["Muy ordenado/a, con procesos claros","Sistemático/a, con metodologías definidas","Flexible, me adapto al equipo","Caótico/a pero creativo/a"]},
-  {cat:"Rutina",text:"¿Cómo preferís estructurar tu semana de trabajo?",opts:["Con tareas rutinarias y bien definidas","Con proyectos de investigación de largo plazo","Con mucho trabajo en equipo y reuniones","Con variedad y sin agenda rígida"]},
-  {cat:"Atención al detalle",text:"¿Qué actitud tenés frente a los errores o la precisión?",opts:["Me molesta mucho cometer errores, soy muy preciso/a","Los analizo para entender qué falló","Los asumo en equipo y buscamos soluciones juntos","Los veo como parte del proceso creativo"]},
-  {cat:"Entorno laboral ideal",text:"¿Cuál sería tu entorno laboral ideal?",opts:["Una empresa grande con procesos claros","Un centro de investigación o universidad","Una organización con fuerte misión social","Una startup, agencia creativa o emprendimiento propio"]},
+  {cat:"Actividades prácticas",text:"¿Qué preferís hacer en tu tiempo libre?",opts:["Arreglar o construir cosas con las manos","Leer o estudiar sobre temas que me interesan","Organizar eventos o salidas con amigos","Crear algo artístico o expresivo"],dims:["R","I","S","A"]},
+  {cat:"Entorno de trabajo",text:"¿En qué tipo de entorno te sentís más cómodo/a trabajando?",opts:["Al aire libre o en espacios físicos activos","En un laboratorio o lugar de experimentación","En una oficina con personas y reuniones","En un estudio creativo o lugar con libertad visual"],dims:["R","I","S","A"]},
+  {cat:"Herramientas",text:"Si tuvieras que aprender algo nuevo mañana, ¿qué elegirías?",opts:["Usar una herramienta o maquinaria nueva","Programar o analizar datos","Hablar en público o negociar","Dibujar, fotografiar o diseñar"],dims:["R","I","E","A"]},
+  {cat:"Resolución de problemas",text:"Frente a un problema, ¿cuál es tu primer impulso?",opts:["Busco soluciones concretas y las ejecuto","Investigo y analizo antes de actuar","Consulto con otros y busco consenso","Improviso y confío en mi intuición"],dims:["R","I","S","A"]},
+  {cat:"Curiosidad intelectual",text:"¿Qué tipo de preguntas te generan más entusiasmo?",opts:["¿Cómo funciona esto exactamente?","¿Por qué las personas actúan así?","¿Cómo podemos organizarnos mejor?","¿Cómo se puede expresar esta idea?"],dims:["I","S","C","A"]},
+  {cat:"Aprendizaje",text:"¿Cómo preferís aprender algo nuevo?",opts:["Experimentando y probando yo mismo/a","Leyendo teoría y profundizando conceptos","Aprendiendo en grupo o con un mentor","A través de ejemplos visuales o narrativos"],dims:["R","I","S","A"]},
+  {cat:"Proyectos",text:"¿Qué tipo de proyecto te motivaría más?",opts:["Diseñar un sistema técnico o mecánico","Investigar un fenómeno natural o social","Coordinar un equipo para un objetivo común","Producir una obra o contenido creativo"],dims:["R","I","E","A"]},
+  {cat:"Trabajo intelectual",text:"Cuando leés o estudiás, ¿qué te resulta más satisfactorio?",opts:["Entender cómo funciona algo paso a paso","Llegar a conclusiones después de mucho análisis","Aplicar lo aprendido con otras personas","Imaginar posibilidades nuevas a partir de lo que leo"],dims:["R","I","S","A"]},
+  {cat:"Expresión personal",text:"¿Cómo expresás mejor lo que sentís o pensás?",opts:["A través de acciones concretas","Con argumentos y datos","Hablando y conectando con otros","Con imágenes, música, escritura o diseño"],dims:["R","I","S","A"]},
+  {cat:"Creatividad",text:"¿Qué valorás más en un trabajo?",opts:["Que sea útil y tenga impacto real","Que sea riguroso e intelectualmente desafiante","Que implique colaboración y relaciones humanas","Que me dé libertad para ser creativo/a"],dims:["R","I","S","A"]},
+  {cat:"Estética",text:"¿Cuál de estas actividades disfrutarías más?",opts:["Construir o reparar algo físico","Analizar datos para encontrar patrones","Liderar una reunión o presentación","Escribir, ilustrar o componer algo propio"],dims:["R","I","E","A"]},
+  {cat:"Ambigüedad",text:"¿Cómo te sentís frente a situaciones abiertas, sin una respuesta clara?",opts:["Me genera ansiedad, prefiero instrucciones claras","Me interesa encontrar la respuesta correcta","Prefiero decidir en conjunto","Me entusiasma, disfruto explorar"],dims:["C","I","S","A"]},
+  {cat:"Relaciones interpersonales",text:"¿Qué rol solés tener en un grupo?",opts:["El que hace y ejecuta las tareas","El que piensa y analiza la situación","El que organiza y sostiene al grupo","El que propone ideas nuevas o diferentes"],dims:["R","I","S","A"]},
+  {cat:"Motivación social",text:"¿Qué te hace sentir que tu trabajo tiene sentido?",opts:["Ver resultados concretos y tangibles","Que el análisis que hice fue correcto","Que ayudé a alguien o mejoré algo para otros","Que creé algo que impacta o emociona"],dims:["R","I","S","A"]},
+  {cat:"Comunicación",text:"¿Cómo preferís comunicarte en el trabajo?",opts:["Con instrucciones claras y directas","Con informes detallados y bien fundamentados","En conversaciones fluidas y empáticas","A través de presentaciones o recursos visuales"],dims:["C","I","S","A"]},
+  {cat:"Impacto",text:"Si pudieras elegir, ¿cuál sería tu contribución ideal al mundo?",opts:["Construir infraestructura o soluciones físicas","Generar conocimiento o descubrimientos","Mejorar la vida de personas o comunidades","Crear cultura, arte o experiencias"],dims:["R","I","S","A"]},
+  {cat:"Liderazgo",text:"¿Cómo te relacionás con el liderazgo?",opts:["Prefiero ejecutar tareas bien definidas","Prefiero liderar desde el conocimiento técnico","Me siento cómodo/a guiando e inspirando equipos","Lidero desde la visión y la originalidad"],dims:["C","I","E","A"]},
+  {cat:"Riesgo",text:"¿Cómo te sentís frente a la incertidumbre y el riesgo?",opts:["Prefiero entornos estables y predecibles","Analizo el riesgo antes de decidir","Confío en el equipo para navegarlo","Me motiva, es donde me siento vivo/a"],dims:["C","I","S","E"]},
+  {cat:"Objetivos",text:"¿Cuál de estos objetivos profesionales te moviliza más?",opts:["Dominar un oficio o habilidad técnica","Convertirme en referente en mi área","Generar cambio social o comunitario","Crear algo innovador desde cero"],dims:["R","I","S","E"]},
+  {cat:"Decisiones",text:"¿Cómo tomás decisiones importantes?",opts:["Con criterios prácticos y concretos","Con análisis de datos y evidencia","Considerando el impacto en las personas","Confío en mi intuición y visión"],dims:["R","I","S","A"]},
+  {cat:"Organización",text:"¿Cómo describís tu forma de organizarte?",opts:["Muy ordenado/a, con procesos claros","Sistemático/a, con metodologías definidas","Flexible, me adapto al equipo","Caótico/a pero creativo/a"],dims:["C","C","S","A"]},
+  {cat:"Rutina",text:"¿Cómo preferís estructurar tu semana de trabajo?",opts:["Con tareas rutinarias y bien definidas","Con proyectos de investigación de largo plazo","Con mucho trabajo en equipo y reuniones","Con variedad y sin agenda rígida"],dims:["C","I","S","A"]},
+  {cat:"Atención al detalle",text:"¿Qué actitud tenés frente a los errores o la precisión?",opts:["Me molesta mucho cometer errores, soy muy preciso/a","Los analizo para entender qué falló","Los asumo en equipo y buscamos soluciones juntos","Los veo como parte del proceso creativo"],dims:["C","I","S","A"]},
+  {cat:"Entorno laboral ideal",text:"¿Cuál sería tu entorno laboral ideal?",opts:["Una empresa grande con procesos claros","Un centro de investigación o universidad","Una organización con fuerte misión social","Una startup, agencia creativa o emprendimiento propio"],dims:["C","I","S","E"]},
 ];
 
-const LETTERS=['A','B','C','D'];
-let vCurrent=0,vAnswers=new Array(VQUESTIONS.length).fill(null);
+const RIASEC_LABELS={
+  R:{name:"Realista",desc:"Orientado/a a lo práctico, manual y concreto"},
+  I:{name:"Investigador",desc:"Analítico/a, curioso/a y orientado/a al conocimiento"},
+  A:{name:"Artístico",desc:"Creativo/a, expresivo/a y original"},
+  S:{name:"Social",desc:"Empático/a, colaborativo/a y orientado/a a las personas"},
+  E:{name:"Emprendedor",desc:"Líder, ambicioso/a y persuasivo/a"},
+  C:{name:"Convencional",desc:"Organizado/a, metódico/a y estructurado/a"}
+};
 
+function calcRIASEC(answers){
+  const scores={R:0,I:0,A:0,S:0,E:0,C:0};
+  answers.forEach((ans,i)=>{if(ans!==null){const dim=VQUESTIONS[i].dims[ans];scores[dim]=(scores[dim]||0)+1;}});
+  return scores;
+}
+
+function iniciarVocacional(){startVocacional();}
+function iniciarEneagrama(){startEneagrama();}
 function startVocacional(){vAnswers=new Array(VQUESTIONS.length).fill(null);vCurrent=0;buildVQ();goTo('screen-quiz');showVQ(0);}
 function buildVQ(){
   const body=document.getElementById('quiz-body');body.innerHTML='';
@@ -533,8 +605,29 @@ async function submitVocacional(){
   document.getElementById('loader-ring').className='loader-ring';
   document.getElementById('loader-text').textContent='Analizando tu perfil vocacional...';
   goTo('screen-loading');
-  const summary=VQUESTIONS.map((q,i)=>`${i+1}. [${q.cat}] ${q.text}\nRespuesta: ${vAnswers[i]!==null?q.opts[vAnswers[i]]:'Sin respuesta'}`).join('\n\n');
-  const prompt=`Sos un experto en orientación vocacional. Analizá las respuestas y generá un perfil profesional personalizado.\n\nDATOS: Nombre: ${userData.nombre}, Sexo: ${userData.sexo}, Situación: ${userData.situacion}, Localidad: ${userData.localidad}\n\nRESPUESTAS:\n${summary}\n\nRespondé SOLO con JSON puro (sin markdown ni backticks):\n{"titulo":"Nombre del perfil vocacional","subtitulo":"Frase que capture la esencia laboral","descripcion":"3 párrafos en segunda persona separados por \\n\\n","areas":["5 a 7 áreas vocacionales concretas"],"fortalezas":["5 fortalezas laborales en segunda persona"],"desafios":["4 desafíos con empatía"]}`;
+
+  // Calcular puntajes RIASEC
+  const riasec = calcRIASEC(vAnswers);
+  const total = Object.values(riasec).reduce((a,b)=>a+b,0);
+  const sorted = Object.entries(riasec).sort((a,b)=>b[1]-a[1]);
+  const top3 = sorted.slice(0,3).map(([k,v])=>`${RIASEC_LABELS[k].name} (${v}/${total})`).join(', ');
+  const scoresSummary = Object.entries(riasec).map(([k,v])=>`${RIASEC_LABELS[k].name}: ${v}/${total}`).join(', ');
+  const topDim = sorted[0][0];
+  const secondDim = sorted[1][0];
+
+  const prompt=`Sos un experto en orientación vocacional basada en el modelo Holland/RIASEC. Una persona completó un test vocacional y estos son sus resultados por dimensión.
+
+DATOS: Nombre: ${userData.nombre}, Sexo: ${userData.sexo}, Situación: ${userData.situacion}, Localidad: ${userData.localidad}
+
+PUNTAJES RIASEC (sobre ${total} respuestas):
+${scoresSummary}
+
+DIMENSIÓN PRINCIPAL: ${RIASEC_LABELS[topDim].name} — ${RIASEC_LABELS[topDim].desc}
+DIMENSIÓN SECUNDARIA: ${RIASEC_LABELS[secondDim].name} — ${RIASEC_LABELS[secondDim].desc}
+PERFIL TOP 3: ${top3}
+
+Generá un perfil profesional personalizado y profundo basado en estas dimensiones. Respondé SOLO con JSON puro (sin markdown ni backticks):
+{"titulo":"Nombre del perfil vocacional que combine las dimensiones principales (ej: El Investigador Social, La Creadora Práctica)","subtitulo":"Frase que capture la esencia laboral en una línea","descripcion":"3 párrafos en segunda persona que describan cómo piensa, qué la motiva y cómo trabaja esta persona según su perfil RIASEC. Incorporar las dimensiones secundarias si son relevantes. Separados por \n\n","areas":["6 a 8 áreas vocacionales o profesiones muy concretas y específicas para este perfil RIASEC"],"fortalezas":["5 fortalezas laborales específicas derivadas del perfil RIASEC, en segunda persona"],"desafios":["4 desafíos de crecimiento típicos de este perfil, formulados con empatía"]}`;
   try{
     const res=await fetch("/.netlify/functions/analyze",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({prompt,max_tokens:1000})});
     const data=await res.json();
@@ -546,6 +639,18 @@ async function submitVocacional(){
     document.getElementById('result-areas').innerHTML=(r.areas||[]).map(a=>`<div class="area-chip"><div class="area-dot"></div><span class="area-name">${a}</span></div>`).join('');
     document.getElementById('result-strengths').innerHTML=(r.fortalezas||[]).map(f=>`<div class="strength-item"><span class="strength-icon">✦</span><span>${f}</span></div>`).join('');
     document.getElementById('result-challenges').innerHTML=(r.desafios||[]).map(d=>`<div class="challenge-item"><span class="challenge-icon">◇</span><span>${d}</span></div>`).join('');
+    // Mostrar puntajes RIASEC
+    const riasecEl = document.getElementById('result-riasec');
+    if(riasecEl){
+      const sortedR = Object.entries(riasec).sort((a,b)=>b[1]-a[1]);
+      const maxR = Math.max(...Object.values(riasec));
+      riasecEl.innerHTML = sortedR.map(([k,v])=>`
+        <div class="score-row">
+          <div class="score-label">${RIASEC_LABELS[k].name}</div>
+          <div class="score-bar-wrap"><div class="score-bar-fill" style="width:${maxR>0?(v/maxR)*100:0}%;background:${v===maxR?'var(--blue)':'#93c5fd'}"></div></div>
+          <div class="score-val">${v}/${total}</div>
+        </div>`).join('');
+    }
     fetch("/.netlify/functions/analyze",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({guardar:{...userData,herramienta:"Perfil Vocacional",perfil:r.titulo||'Sin titulo'}})}).catch(()=>{});
   }catch(err){goTo('screen-result');document.getElementById('result-title').textContent='Error';document.getElementById('result-desc').innerHTML=`<div class="error-box">${err.message}</div>`;}
 }
@@ -653,7 +758,4 @@ function descargarPDF(tipo){
   window.print();
 }
 
-function restart(){vAnswers=new Array(VQUESTIONS.length).fill(null);eneaAnswers=Array(45).fill(null);userData={};['f-nombre','f-localidad','f-email'].forEach(id=>document.getElementById(id).value='');['f-sexo','f-fecha','f-situacion'].forEach(id=>document.getElementById(id).value='');goTo('screen-intro');}
-</script>
-</body>
-</html>
+function restart(){vAnswers=new Array(VQUESTIONS.length).fill(null);eneaAnswers=Array
