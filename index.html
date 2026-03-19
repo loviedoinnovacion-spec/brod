@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="es">
 <head>
 <meta charset="UTF-8">
@@ -6,7 +7,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Outfit:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
- 
+
 :root {
   --bg: #f7f5f0;
   --white: #ffffff;
@@ -25,16 +26,16 @@
   --enea: #6d28d9;
   --enea-light: #ede9fe;
 }
- 
+
 body { background: var(--bg); color: var(--ink); font-family: 'Outfit', sans-serif; min-height: 100vh; overflow-x: hidden; }
- 
+
 /* Subtle grain texture */
 body::after { content: ''; position: fixed; inset: 0; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E"); pointer-events: none; z-index: 9999; opacity: 0.4; }
- 
+
 .app { position: relative; z-index: 1; }
 .screen { display: none; }
 .screen.active { display: flex; }
- 
+
 /* ── ANIMATIONS ── */
 @keyframes fadeUp { from { opacity:0; transform:translateY(32px); } to { opacity:1; transform:translateY(0); } }
 @keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
@@ -43,67 +44,67 @@ body::after { content: ''; position: fixed; inset: 0; background-image: url("dat
 @keyframes shimmer { from { background-position: -200% center; } to { background-position: 200% center; } }
 @keyframes pulse { 0%,100% { transform:scale(1); } 50% { transform:scale(1.04); } }
 @keyframes spin { to { transform:rotate(360deg); } }
- 
+
 .anim-fadeup { animation: fadeUp 0.6s cubic-bezier(0.16,1,0.3,1) both; }
 .anim-fadeup-2 { animation: fadeUp 0.6s cubic-bezier(0.16,1,0.3,1) 0.1s both; }
 .anim-fadeup-3 { animation: fadeUp 0.6s cubic-bezier(0.16,1,0.3,1) 0.2s both; }
 .anim-fadeup-4 { animation: fadeUp 0.6s cubic-bezier(0.16,1,0.3,1) 0.3s both; }
 .anim-fadeup-5 { animation: fadeUp 0.6s cubic-bezier(0.16,1,0.3,1) 0.4s both; }
- 
+
 /* ── BUTTONS ── */
 .btn-primary { background: var(--blue); color: white; border: none; padding: 20px 64px; font-family: 'Outfit', sans-serif; font-size: 18px; font-weight: 600; letter-spacing: 0.03em; cursor: pointer; transition: all 0.25s cubic-bezier(0.16,1,0.3,1); position: relative; overflow: hidden; }
 .btn-primary::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(255,255,255,0.15), transparent); opacity: 0; transition: opacity 0.25s; }
 .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 16px 48px rgba(30,58,138,0.35); }
 .btn-primary:hover::before { opacity: 1; }
 .btn-primary:active { transform: translateY(-1px); }
- 
+
 .btn-secondary { background: transparent; border: 2px solid var(--border); color: var(--muted); padding: 12px 24px; font-family: 'Outfit', sans-serif; font-size: 13px; font-weight: 500; cursor: pointer; transition: all 0.2s; }
 .btn-secondary:hover { border-color: var(--ink); color: var(--ink); }
- 
+
 .btn-gold { background: var(--gold); color: white; border: none; padding: 12px 28px; font-family: 'Outfit', sans-serif; font-size: 13px; font-weight: 600; cursor: pointer; transition: all 0.25s; }
 .btn-gold:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(184,134,11,0.3); }
- 
+
 .btn-enea { background: var(--enea); color: white; border: none; padding: 11px 32px; font-family: 'Outfit', sans-serif; font-size: 13px; font-weight: 600; cursor: pointer; transition: all 0.25s; opacity: 0.4; pointer-events: none; }
 .btn-enea.enabled { opacity: 1; pointer-events: all; }
 .btn-enea.enabled:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(109,40,217,0.35); }
- 
+
 .btn-next-voc { background: var(--blue); color: white; border: none; padding: 11px 32px; font-family: 'Outfit', sans-serif; font-size: 13px; font-weight: 600; cursor: pointer; transition: all 0.25s; opacity: 0.4; pointer-events: none; }
 .btn-next-voc.enabled { opacity: 1; pointer-events: all; }
 .btn-next-voc.enabled:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(30,58,138,0.35); }
- 
+
 /* ── INTRO ── */
 #screen-intro { min-height: 100vh; flex-direction: column; align-items: center; justify-content: center; padding: 48px 24px; text-align: center; position: relative; background: linear-gradient(160deg, #f0f4ff 0%, #f7f5f0 50%, #faf8f3 100%); }
 #screen-intro::before { content: ''; position: absolute; top: -100px; right: -100px; width: 500px; height: 500px; background: radial-gradient(circle, rgba(30,58,138,0.06) 0%, transparent 70%); pointer-events: none; }
 #screen-intro::after { content: ''; position: absolute; bottom: -80px; left: -80px; width: 400px; height: 400px; background: radial-gradient(circle, rgba(109,40,217,0.05) 0%, transparent 70%); pointer-events: none; z-index: 0; }
- 
+
 .intro-logo { display: flex; align-items: center; gap: 14px; margin-bottom: 48px; justify-content: center; position: relative; z-index: 1; }
 .logo-badge { font-family: 'DM Mono', monospace; font-size: 18px; font-weight: 500; letter-spacing: 0.12em; color: var(--blue); background: var(--blue-light); border: 2px solid var(--blue); padding: 6px 16px; }
 .logo-divider { width: 1px; height: 28px; background: var(--border); }
 .logo-name { font-family: 'Playfair Display', serif; font-size: 18px; font-weight: 600; color: var(--ink2); letter-spacing: 0.02em; }
- 
+
 .intro-eyebrow { font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--blue2); margin-bottom: 20px; position: relative; z-index: 1; }
- 
+
 .intro-title { font-family: 'Playfair Display', serif; font-size: clamp(52px, 9vw, 96px); font-weight: 900; line-height: 1.0; margin-bottom: 24px; color: var(--ink); position: relative; z-index: 1; }
 .intro-title span { color: var(--blue); position: relative; display: inline-block; }
 .intro-title span::after { content: ''; position: absolute; bottom: 4px; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--blue), var(--enea)); transform: scaleX(0); transform-origin: left; transition: transform 0.6s cubic-bezier(0.16,1,0.3,1) 0.5s; }
 .screen.active .intro-title span::after { transform: scaleX(1); }
- 
+
 .intro-sub { font-size: 17px; font-weight: 300; color: var(--muted); max-width: 480px; line-height: 1.7; margin-bottom: 48px; position: relative; z-index: 1; }
- 
+
 .intro-stats { display: flex; gap: 40px; margin-bottom: 48px; justify-content: center; position: relative; z-index: 1; }
 .stat-item { text-align: center; }
 .stat-num { font-family: 'Playfair Display', serif; font-size: 40px; font-weight: 700; color: var(--blue); display: block; line-height: 1; margin-bottom: 4px; }
 .stat-label { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); }
- 
+
 .intro-copyright { margin-top: 40px; font-size: 11px; color: var(--muted); opacity: 0.7; line-height: 1.6; position: relative; z-index: 1; }
- 
+
 /* ── DATOS ── */
 #screen-datos { min-height: 100vh; flex-direction: column; align-items: center; justify-content: center; padding: 64px 24px; background: var(--white); }
 .datos-wrap { width: 100%; max-width: 560px; }
 .step-eyebrow { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--blue2); margin-bottom: 12px; }
 .section-title { font-family: 'Playfair Display', serif; font-size: clamp(28px, 5vw, 40px); font-weight: 700; line-height: 1.2; margin-bottom: 8px; color: var(--ink); }
 .section-sub { font-size: 14px; color: var(--muted); font-weight: 300; margin-bottom: 36px; line-height: 1.6; }
- 
+
 .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 24px; }
 .form-group { display: flex; flex-direction: column; gap: 6px; }
 .form-group.full { grid-column: 1/-1; }
@@ -114,27 +115,27 @@ body::after { content: ''; position: fixed; inset: 0; background-image: url("dat
 .form-input:focus, .form-select:focus { border-color: var(--blue2); box-shadow: 0 0 0 4px rgba(37,99,235,0.1); background: white; }
 .form-input::placeholder { color: #aaa; }
 .datos-error { font-size: 12px; color: var(--danger); margin-bottom: 16px; display: none; background: #fef2f2; padding: 10px 14px; border-left: 3px solid var(--danger); }
- 
+
 /* ── ELECCIÓN ── */
 #screen-eleccion { min-height: 100vh; flex-direction: column; align-items: center; justify-content: center; padding: 64px 24px; background: var(--bg); text-align: center; }
 .eleccion-wrap { max-width: 700px; width: 100%; }
 .eleccion-saludo { font-family: 'Playfair Display', serif; font-size: clamp(32px, 5vw, 52px); font-weight: 700; line-height: 1.2; margin-bottom: 12px; color: var(--ink); }
 .eleccion-sub { font-size: 15px; color: var(--muted); font-weight: 300; margin-bottom: 48px; line-height: 1.7; max-width: 480px; margin-left: auto; margin-right: auto; }
- 
+
 .herramientas-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 32px; }
 @media(max-width:560px){.herramientas-grid{grid-template-columns:1fr;}}
- 
+
 .herramienta-card { background: var(--white); border: 2px solid var(--border); padding: 32px 28px; cursor: pointer; transition: all 0.3s cubic-bezier(0.16,1,0.3,1); text-align: left; position: relative; overflow: hidden; }
 .herramienta-card::after { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(30,58,138,0.04), transparent); opacity: 0; transition: opacity 0.3s; }
 .herramienta-card.enea::after { background: linear-gradient(135deg, rgba(109,40,217,0.04), transparent); }
 .herramienta-card:hover { border-color: var(--blue); transform: translateY(-6px); box-shadow: 0 20px 60px rgba(30,58,138,0.12); }
 .herramienta-card:hover::after { opacity: 1; }
 .herramienta-card.enea:hover { border-color: var(--enea); box-shadow: 0 20px 60px rgba(109,40,217,0.12); }
- 
+
 .hcard-accent { width: 40px; height: 4px; background: var(--blue); margin-bottom: 20px; transition: width 0.3s; }
 .herramienta-card:hover .hcard-accent { width: 60px; }
 .herramienta-card.enea .hcard-accent { background: var(--enea); }
- 
+
 .hcard-icon { font-size: 32px; margin-bottom: 12px; display: block; }
 .hcard-tag { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--blue2); margin-bottom: 10px; display: block; }
 .herramienta-card.enea .hcard-tag { color: var(--enea); }
@@ -144,7 +145,7 @@ body::after { content: ''; position: fixed; inset: 0; background-image: url("dat
 .herramienta-card.enea .hcard-cta { color: var(--enea); }
 .hcard-arrow { display: inline-block; transition: transform 0.2s; }
 .herramienta-card:hover .hcard-arrow { transform: translateX(4px); }
- 
+
 /* ── QUIZ HEADER ── */
 .quiz-header { position: sticky; top: 0; z-index: 10; background: rgba(255,255,255,0.95); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); padding: 14px 32px; display: flex; align-items: center; justify-content: space-between; box-shadow: 0 1px 12px rgba(0,0,0,0.06); }
 .quiz-logo { display: flex; align-items: center; gap: 10px; }
@@ -157,19 +158,19 @@ body::after { content: ''; position: fixed; inset: 0; background-image: url("dat
 .progress-fill { height: 100%; background: linear-gradient(90deg, var(--blue), var(--blue2)); transition: width 0.5s cubic-bezier(0.16,1,0.3,1); width: 0%; border-radius: 2px; }
 .progress-fill.enea-fill { background: linear-gradient(90deg, var(--enea), #8b5cf6); }
 .quiz-counter { font-family: 'DM Mono', monospace; font-size: 12px; color: var(--muted); }
- 
+
 /* ── QUIZ VOCACIONAL ── */
 #screen-quiz { flex-direction: column; min-height: 100vh; background: var(--bg); }
 .quiz-body { max-width: 660px; margin: 0 auto; padding: 60px 24px 120px; width: 100%; }
 .question-block { display: none; animation: fadeUp 0.4s cubic-bezier(0.16,1,0.3,1) both; }
 .question-block.active { display: block; }
- 
+
 .q-category { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--blue2); margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
 .q-category::before { content: ''; display: inline-block; width: 20px; height: 2px; background: var(--blue2); }
- 
+
 .q-text { font-family: 'Playfair Display', serif; font-size: clamp(22px, 4vw, 30px); font-weight: 600; line-height: 1.35; margin-bottom: 32px; color: var(--ink); }
 .options-grid { display: flex; flex-direction: column; gap: 10px; }
- 
+
 .option-btn { background: var(--white); border: 2px solid var(--border); color: var(--ink); padding: 16px 20px; text-align: left; cursor: pointer; font-family: 'Outfit', sans-serif; font-size: 14px; font-weight: 400; line-height: 1.5; transition: all 0.2s cubic-bezier(0.16,1,0.3,1); display: flex; align-items: center; gap: 14px; position: relative; overflow: hidden; }
 .option-btn::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px; background: var(--blue); transform: scaleY(0); transition: transform 0.2s; }
 .option-letter { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--muted); min-width: 18px; transition: color 0.2s; background: var(--bg); padding: 2px 6px; font-weight: 500; }
@@ -179,14 +180,14 @@ body::after { content: ''; position: fixed; inset: 0; background-image: url("dat
 .option-btn.selected { border-color: var(--blue); background: #f0f4ff; transform: translateX(4px); }
 .option-btn.selected::before { transform: scaleY(1); }
 .option-btn.selected .option-letter { color: var(--blue); background: var(--blue-light); }
- 
+
 .quiz-nav { position: fixed; bottom: 0; left: 0; right: 0; background: rgba(255,255,255,0.97); border-top: 1px solid var(--border); padding: 16px 32px; display: flex; justify-content: space-between; align-items: center; z-index: 10; backdrop-filter: blur(12px); }
- 
+
 /* ── QUIZ ENEAGRAMA ── */
 #screen-enea-quiz { flex-direction: column; min-height: 100vh; background: var(--bg); }
 .enea-section-info { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--enea); margin-bottom: 20px; display: flex; align-items: center; gap: 8px; }
 .enea-section-info::before { content: ''; display: inline-block; width: 20px; height: 2px; background: var(--enea); }
- 
+
 .enea-question-item { background: var(--white); border: 2px solid var(--border); padding: 22px; margin-bottom: 12px; animation: scaleIn 0.3s cubic-bezier(0.16,1,0.3,1) both; transition: border-color 0.2s; }
 .enea-question-item:hover { border-color: rgba(109,40,217,0.3); }
 .enea-question-text { font-size: 14px; font-weight: 400; color: var(--ink); margin-bottom: 16px; line-height: 1.6; }
@@ -197,57 +198,57 @@ body::after { content: ''; position: fixed; inset: 0; background-image: url("dat
 .enea-scale-btn.selected { border-color: var(--enea); background: var(--enea-light); color: var(--enea); font-weight: 600; }
 .enea-scale-num { display: block; font-family: 'DM Mono', monospace; font-size: 14px; color: var(--enea); margin-bottom: 3px; font-weight: 500; }
 .enea-scale-btn:not(.selected) .enea-scale-num { color: var(--muted); }
- 
+
 /* ── LOADING ── */
 #screen-loading { min-height: 100vh; flex-direction: column; align-items: center; justify-content: center; gap: 24px; background: var(--white); }
 .loader-ring { width: 52px; height: 52px; border: 3px solid var(--border); border-top-color: var(--blue); border-radius: 50%; animation: spin 0.9s linear infinite; }
 .loader-ring.enea-ring { border-top-color: var(--enea); }
 .loader-text { font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 0.15em; color: var(--muted); text-transform: uppercase; }
- 
+
 /* ── RESULTADOS ── */
 #screen-result, #screen-enea-result { min-height: 100vh; flex-direction: column; padding: 0 0 80px; }
- 
+
 .result-hero { background: var(--blue); padding: 72px 24px 56px; text-align: center; position: relative; overflow: hidden; }
 .result-hero::before { content: ''; position: absolute; top: -50%; left: -20%; width: 80%; height: 200%; background: radial-gradient(ellipse, rgba(255,255,255,0.08) 0%, transparent 60%); pointer-events: none; }
 .result-hero::after { content: ''; position: absolute; bottom: -30px; right: -30px; width: 200px; height: 200px; background: radial-gradient(circle, rgba(255,255,255,0.06) 0%, transparent 70%); }
- 
+
 .enea-result-hero { background: linear-gradient(135deg, var(--enea), #4c1d95); padding: 72px 24px 56px; text-align: center; position: relative; overflow: hidden; }
 .enea-result-hero::before { content: ''; position: absolute; top: -50%; left: -20%; width: 80%; height: 200%; background: radial-gradient(ellipse, rgba(255,255,255,0.08) 0%, transparent 60%); pointer-events: none; }
- 
+
 .result-badge { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase; color: rgba(255,255,255,0.7); margin-bottom: 20px; animation: fadeUp 0.5s both; }
 .result-title { font-family: 'Playfair Display', serif; font-size: clamp(36px, 6vw, 64px); font-weight: 900; line-height: 1.1; margin-bottom: 16px; color: white; animation: fadeUp 0.5s 0.1s both; }
 .result-subtitle { font-size: 16px; color: rgba(255,255,255,0.8); font-weight: 300; max-width: 500px; margin: 0 auto; line-height: 1.6; animation: fadeUp 0.5s 0.2s both; }
- 
+
 .enea-result-emoji { font-size: 64px; margin-bottom: 16px; display: block; animation: scaleIn 0.5s both; }
 .enea-result-tipo { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.6); margin-bottom: 8px; }
 .enea-result-name { font-family: 'Playfair Display', serif; font-size: clamp(36px, 6vw, 64px); font-weight: 900; line-height: 1.1; margin-bottom: 12px; color: white; }
 .enea-result-sub { font-size: 15px; color: rgba(255,255,255,0.8); font-weight: 300; max-width: 500px; margin: 0 auto; line-height: 1.6; }
- 
+
 .result-body, .enea-body { max-width: 760px; margin: 0 auto; padding: 48px 24px 0; }
 .result-section { margin-bottom: 40px; animation: fadeUp 0.5s both; }
 .result-section:nth-child(2){animation-delay:0.1s;} .result-section:nth-child(3){animation-delay:0.15s;} .result-section:nth-child(4){animation-delay:0.2s;} .result-section:nth-child(5){animation-delay:0.25s;}
- 
+
 .section-label { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--blue); margin-bottom: 16px; padding-bottom: 12px; border-bottom: 2px solid var(--blue-light); display: flex; align-items: center; gap: 8px; }
 .section-label::before { content: ''; display: inline-block; width: 16px; height: 2px; background: var(--blue); }
 .section-label.enea-label { color: var(--enea); border-bottom-color: var(--enea-light); }
 .section-label.enea-label::before { background: var(--enea); }
- 
+
 .result-card { background: var(--white); border: 1px solid var(--border); border-left: 4px solid var(--blue); padding: 28px; line-height: 1.8; font-size: 15px; font-weight: 300; color: var(--ink2); box-shadow: 0 2px 12px rgba(0,0,0,0.04); }
 .result-card p { margin-bottom: 14px; } .result-card p:last-child { margin-bottom: 0; }
- 
+
 .areas-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 10px; }
 .area-chip { background: var(--white); border: 1px solid var(--border); padding: 12px 16px; display: flex; align-items: center; gap: 10px; transition: all 0.2s; }
 .area-chip:hover { border-color: var(--blue); transform: translateY(-2px); box-shadow: 0 4px 12px rgba(30,58,138,0.1); }
 .area-dot { width: 8px; height: 8px; background: var(--blue); border-radius: 50%; flex-shrink: 0; }
 .area-name { font-size: 13px; color: var(--ink); font-weight: 400; }
- 
+
 .strengths-list, .challenges-list { display: flex; flex-direction: column; gap: 10px; }
 .strength-item, .challenge-item { background: var(--white); border: 1px solid var(--border); padding: 14px 20px; font-size: 14px; font-weight: 300; color: var(--ink2); display: flex; gap: 14px; align-items: flex-start; transition: all 0.2s; }
 .strength-item:hover { border-color: var(--success); transform: translateX(4px); }
 .challenge-item:hover { border-color: var(--gold); transform: translateX(4px); }
 .strength-icon { color: var(--success); font-size: 14px; flex-shrink: 0; margin-top: 2px; }
 .challenge-icon { color: var(--gold); font-size: 14px; flex-shrink: 0; margin-top: 2px; }
- 
+
 .scores-grid { display: flex; flex-direction: column; gap: 10px; }
 .score-row { display: flex; align-items: center; gap: 12px; padding: 10px 16px; background: var(--white); border: 1px solid var(--border); transition: border-color 0.2s; }
 .score-row:hover { border-color: var(--enea); }
@@ -255,15 +256,15 @@ body::after { content: ''; position: fixed; inset: 0; background-image: url("dat
 .score-bar-wrap { flex: 1; background: var(--bg); height: 6px; overflow: hidden; border-radius: 3px; }
 .score-bar-fill { height: 100%; border-radius: 3px; transition: width 0.8s cubic-bezier(0.16,1,0.3,1); }
 .score-val { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--muted); width: 32px; text-align: right; flex-shrink: 0; }
- 
+
 .result-brand-footer { display: flex; align-items: center; gap: 12px; margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--border); }
 .result-brand-name { font-size: 12px; font-weight: 300; color: var(--muted); }
- 
+
 .btn-pdf { background: transparent; border: 2px solid var(--blue); color: var(--blue); padding: 11px 26px; font-family: 'Outfit', sans-serif; font-size: 13px; font-weight: 600; cursor: pointer; transition: all 0.25s; display: inline-block; }
 .btn-pdf:hover { background: var(--blue); color: white; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(30,58,138,0.2); }
- 
+
 .error-box { background: #fef2f2; border: 1px solid #fecaca; border-left: 4px solid var(--danger); padding: 20px 24px; color: var(--danger); font-size: 14px; line-height: 1.6; }
- 
+
 @media print {
   body { background: white !important; color: #111 !important; }
   .screen { display: none !important; }
@@ -291,7 +292,7 @@ body::after { content: ''; position: fixed; inset: 0; background-image: url("dat
 </head>
 <body>
 <div class="app">
- 
+
 <!-- INTRO -->
 <div id="screen-intro" class="screen active">
   <div class="intro-logo anim-fadeup">
@@ -302,7 +303,7 @@ body::after { content: ''; position: fixed; inset: 0; background-image: url("dat
   <div class="intro-eyebrow anim-fadeup-2">Herramientas de desarrollo personal</div>
   <h1 class="intro-title anim-fadeup-3">Explorá tu<br><span>potencial</span></h1>
   <p class="intro-sub anim-fadeup-4">Respondé algunas preguntas y accedé a herramientas diseñadas por Espacio BrOD para conocerte mejor y orientar tu desarrollo profesional.</p>
- 
+
   <button class="btn-primary anim-fadeup-5" onclick="goTo('screen-datos')">Comenzar →</button>
   <div class="intro-copyright anim-fadeup-5">
     Herramienta desarrollada por Espacio BrOD - Brechas y Oportunidades Digitales.<br>
@@ -319,7 +320,7 @@ body::after { content: ''; position: fixed; inset: 0; background-image: url("dat
     </span>
   </div>
 </div>
- 
+
 <!-- DATOS -->
 <div id="screen-datos" class="screen">
   <div class="datos-wrap">
@@ -341,7 +342,7 @@ body::after { content: ''; position: fixed; inset: 0; background-image: url("dat
     </div>
   </div>
 </div>
- 
+
 <!-- ELECCIÓN -->
 <div id="screen-eleccion" class="screen">
   <div class="eleccion-wrap">
@@ -369,7 +370,7 @@ body::after { content: ''; position: fixed; inset: 0; background-image: url("dat
     <button class="btn-secondary anim-fadeup-4" onclick="goTo('screen-datos')">← Modificar mis datos</button>
   </div>
 </div>
- 
+
 <!-- INTRO VOCACIONAL -->
 <div id="screen-intro-voc" class="screen">
   <div class="datos-wrap" style="max-width:600px;">
@@ -396,7 +397,7 @@ body::after { content: ''; position: fixed; inset: 0; background-image: url("dat
     </div>
   </div>
 </div>
- 
+
 <!-- INTRO ENEAGRAMA -->
 <div id="screen-intro-enea" class="screen">
   <div class="datos-wrap" style="max-width:600px;">
@@ -423,7 +424,7 @@ body::after { content: ''; position: fixed; inset: 0; background-image: url("dat
     </div>
   </div>
 </div>
- 
+
 <!-- QUIZ VOCACIONAL -->
 <div id="screen-quiz" class="screen" style="flex-direction:column;">
   <div class="quiz-header">
@@ -440,7 +441,7 @@ body::after { content: ''; position: fixed; inset: 0; background-image: url("dat
     <button class="btn-next-voc" id="btn-next" onclick="nextQuestion()">Siguiente →</button>
   </div>
 </div>
- 
+
 <!-- QUIZ ENEAGRAMA -->
 <div id="screen-enea-quiz" class="screen" style="flex-direction:column;">
   <div class="quiz-header">
@@ -457,13 +458,13 @@ body::after { content: ''; position: fixed; inset: 0; background-image: url("dat
     <button class="btn-enea" id="btn-next-enea" onclick="nextEnea()">Siguiente →</button>
   </div>
 </div>
- 
+
 <!-- LOADING -->
 <div id="screen-loading" class="screen">
   <div class="loader-ring" id="loader-ring"></div>
   <div class="loader-text" id="loader-text">Analizando tu perfil...</div>
 </div>
- 
+
 <!-- RESULTADO VOCACIONAL -->
 <div id="screen-result" class="screen" style="flex-direction:column;">
   <div class="result-hero">
@@ -485,7 +486,7 @@ body::after { content: ''; position: fixed; inset: 0; background-image: url("dat
     <div class="result-brand-footer"><span class="logo-badge" style="font-size:13px;padding:3px 10px;">BrOD</span><span class="result-brand-name">Espacio BrOD - Brechas y Oportunidades Digitales</span></div>
   </div>
 </div>
- 
+
 <!-- RESULTADO ENEAGRAMA -->
 <div id="screen-enea-result" class="screen" style="flex-direction:column;">
   <div class="enea-result-hero">
@@ -509,14 +510,14 @@ body::after { content: ''; position: fixed; inset: 0; background-image: url("dat
     <div class="result-brand-footer"><span class="logo-badge" style="font-size:13px;padding:3px 10px;">BrOD</span><span class="result-brand-name">Espacio BrOD - Brechas y Oportunidades Digitales</span></div>
   </div>
 </div>
- 
+
 <!-- PDF -->
 <div id="pdf-content" style="display:none;"></div>
 </div>
- 
+
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 function goTo(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');window.scrollTo(0,0);}
- 
+
 let userData={};
 function validarDatos(){
   const n=document.getElementById('f-nombre').value.trim(),em=document.getElementById('f-email').value.trim(),sx=document.getElementById('f-sexo').value,fe=document.getElementById('f-fecha').value.trim(),lo=document.getElementById('f-localidad').value.trim(),si=document.getElementById('f-situacion').value;
@@ -526,7 +527,7 @@ function validarDatos(){
   document.getElementById('eleccion-saludo').textContent=`¡Hola, ${n.split(' ')[0]}!`;
   goTo('screen-eleccion');
 }
- 
+
 // ── DIMENSIONES RIASEC ──
 // R=Realista, I=Investigador, A=Artístico, S=Social, E=Emprendedor, C=Convencional
 // Cada pregunta tiene 4 opciones mapeadas a dimensiones: [opt0, opt1, opt2, opt3]
@@ -556,7 +557,7 @@ const VQUESTIONS=[
   {cat:"Atención al detalle",text:"¿Qué actitud tenés frente a los errores o la precisión?",opts:["Me molesta mucho cometer errores, soy muy preciso/a","Los analizo para entender qué falló","Los asumo en equipo y buscamos soluciones juntos","Los veo como parte del proceso creativo"],dims:["C","I","S","A"]},
   {cat:"Entorno laboral ideal",text:"¿Cuál sería tu entorno laboral ideal?",opts:["Una empresa grande con procesos claros","Un centro de investigación o universidad","Una organización con fuerte misión social","Una startup, agencia creativa o emprendimiento propio"],dims:["C","I","S","E"]},
 ];
- 
+
 const RIASEC_LABELS={
   R:{name:"Realista",desc:"Orientado/a a lo práctico, manual y concreto"},
   I:{name:"Investigador",desc:"Analítico/a, curioso/a y orientado/a al conocimiento"},
@@ -565,13 +566,14 @@ const RIASEC_LABELS={
   E:{name:"Emprendedor",desc:"Líder, ambicioso/a y persuasivo/a"},
   C:{name:"Convencional",desc:"Organizado/a, metódico/a y estructurado/a"}
 };
- 
+
 function calcRIASEC(answers){
   const scores={R:0,I:0,A:0,S:0,E:0,C:0};
   answers.forEach((ans,i)=>{if(ans!==null){const dim=VQUESTIONS[i].dims[ans];scores[dim]=(scores[dim]||0)+1;}});
   return scores;
 }
- 
+
+const LETTERS=['A','B','C','D'];
 function iniciarVocacional(){startVocacional();}
 function iniciarEneagrama(){startEneagrama();}
 function startVocacional(){vAnswers=new Array(VQUESTIONS.length).fill(null);vCurrent=0;buildVQ();goTo('screen-quiz');showVQ(0);}
@@ -599,12 +601,12 @@ function showVQ(idx){
 function selectVO(qi,oi){vAnswers[qi]=oi;document.querySelectorAll(`[id^="vo-${qi}-"]`).forEach(b=>b.classList.remove('selected'));document.getElementById(`vo-${qi}-${oi}`).classList.add('selected');document.getElementById('btn-next').classList.add('enabled');}
 function nextQuestion(){if(vAnswers[vCurrent]===null)return;if(vCurrent===VQUESTIONS.length-1)submitVocacional();else{vCurrent++;showVQ(vCurrent);}}
 function prevQuestion(){if(vCurrent>0){vCurrent--;showVQ(vCurrent);}}
- 
+
 async function submitVocacional(){
   document.getElementById('loader-ring').className='loader-ring';
   document.getElementById('loader-text').textContent='Analizando tu perfil vocacional...';
   goTo('screen-loading');
- 
+
   // Calcular puntajes RIASEC
   const riasec = calcRIASEC(vAnswers);
   const total = Object.values(riasec).reduce((a,b)=>a+b,0);
@@ -613,18 +615,18 @@ async function submitVocacional(){
   const scoresSummary = Object.entries(riasec).map(([k,v])=>`${RIASEC_LABELS[k].name}: ${v}/${total}`).join(', ');
   const topDim = sorted[0][0];
   const secondDim = sorted[1][0];
- 
+
   const prompt=`Sos un experto en orientación vocacional basada en el modelo Holland/RIASEC. Una persona completó un test vocacional y estos son sus resultados por dimensión.
- 
+
 DATOS: Nombre: ${userData.nombre}, Sexo: ${userData.sexo}, Situación: ${userData.situacion}, Localidad: ${userData.localidad}
- 
+
 PUNTAJES RIASEC (sobre ${total} respuestas):
 ${scoresSummary}
- 
+
 DIMENSIÓN PRINCIPAL: ${RIASEC_LABELS[topDim].name} — ${RIASEC_LABELS[topDim].desc}
 DIMENSIÓN SECUNDARIA: ${RIASEC_LABELS[secondDim].name} — ${RIASEC_LABELS[secondDim].desc}
 PERFIL TOP 3: ${top3}
- 
+
 Generá un perfil profesional personalizado y profundo basado en estas dimensiones. Respondé SOLO con JSON puro (sin markdown ni backticks):
 {"titulo":"Nombre del perfil vocacional que combine las dimensiones principales (ej: El Investigador Social, La Creadora Práctica)","subtitulo":"Frase que capture la esencia laboral en una línea","descripcion":"3 párrafos en segunda persona que describan cómo piensa, qué la motiva y cómo trabaja esta persona según su perfil RIASEC. Incorporar las dimensiones secundarias si son relevantes. Separados por \n\n","areas":["6 a 8 áreas vocacionales o profesiones muy concretas y específicas para este perfil RIASEC"],"fortalezas":["5 fortalezas laborales específicas derivadas del perfil RIASEC, en segunda persona"],"desafios":["4 desafíos de crecimiento típicos de este perfil, formulados con empatía"]}`;
   try{
@@ -653,7 +655,7 @@ Generá un perfil profesional personalizado y profundo basado en estas dimension
     fetch("/.netlify/functions/analyze",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({guardar:{...userData,herramienta:"Perfil Vocacional",perfil:r.titulo||'Sin titulo'}})}).catch(()=>{});
   }catch(err){goTo('screen-result');document.getElementById('result-title').textContent='Error';document.getElementById('result-desc').innerHTML=`<div class="error-box">${err.message}</div>`;}
 }
- 
+
 const SCALE_LABELS=["Nada que ver conmigo","Poco","A veces","Bastante","Muy yo"];
 const ENEA_SECTIONS=[
   {tipo:"Perfeccionista",questions:["Me molesta cuando las cosas están mal hechas.","Siento que debería hacer lo correcto aunque nadie me mire.","Me cuesta relajarme cuando algo no salió perfecto.","Me gusta organizar y mejorar lo que no funciona.","Soy exigente conmigo mismo/a."]},
@@ -677,7 +679,7 @@ const PROFILES=[
   {name:"Desafiador",emoji:"💪",color:"#991b1b",desc:"Sos directo/a, decidido/a y protector/a.",careers:"Liderazgo Empresarial, Política, Derecho, Fuerzas Armadas, Emprendimiento, Dirección."},
   {name:"Pacificador",emoji:"☮️",color:"#065f46",desc:"Sos tranquilo/a, empático/a y buen mediador/a.",careers:"Mediación, Diplomacia, Trabajo Social, Psicología, Relaciones Internacionales, Educación."},
 ];
- 
+
 let eneaSection=0,eneaAnswers=Array(45).fill(null);
 function startEneagrama(){eneaAnswers=Array(45).fill(null);eneaSection=0;buildEneaSec();goTo('screen-enea-quiz');}
 function buildEneaSec(){
@@ -702,7 +704,7 @@ function selectEnea(qi,val){eneaAnswers[eneaSection*5+qi]=val;document.querySele
 function updateEneaBtn(){const ok=eneaAnswers.slice(eneaSection*5,eneaSection*5+5).every(a=>a!==null);const btn=document.getElementById('btn-next-enea');btn.classList.toggle('enabled',ok);btn.textContent=eneaSection===8?'Ver mi perfil →':'Siguiente →';}
 function nextEnea(){if(!eneaAnswers.slice(eneaSection*5,eneaSection*5+5).every(a=>a!==null))return;if(eneaSection===8)submitEneagrama();else{eneaSection++;buildEneaSec();window.scrollTo(0,0);}}
 function prevEnea(){if(eneaSection>0){eneaSection--;buildEneaSec();window.scrollTo(0,0);}}
- 
+
 async function submitEneagrama(){
   const scores=PROFILES.map((_,pi)=>eneaAnswers.slice(pi*5,pi*5+5).reduce((s,v)=>s+(v||0),0));
   const topIdx=scores.indexOf(Math.max(...scores));
@@ -731,9 +733,9 @@ async function submitEneagrama(){
     document.getElementById('enea-scores').innerHTML=sorted.map(({i,s})=>`<div class="score-row"><div class="score-label">${PROFILES[i].emoji} ${PROFILES[i].name}</div><div class="score-bar-wrap"><div class="score-bar-fill" style="width:${(s/25)*100}%;background:${i===topIdx?PROFILES[i].color:'#e5e7eb'}"></div></div><div class="score-val">${s}/25</div></div>`).join('');
   }catch(err){goTo('screen-enea-result');document.getElementById('enea-result-name').textContent='Error';document.getElementById('enea-result-desc').innerHTML=`<div class="error-box">${err.message}</div>`;}
 }
- 
+
 function formatFecha(input){let v=input.value.replace(/\D/g,'');if(v.length>=3&&v.length<=4)v=v.slice(0,2)+'/'+v.slice(2);else if(v.length>=5)v=v.slice(0,2)+'/'+v.slice(2,4)+'/'+v.slice(4,8);input.value=v;}
- 
+
 function descargarPDF(tipo){
   const pdf=document.getElementById('pdf-content');const u=userData;
   if(tipo==='vocacional'){
@@ -756,7 +758,7 @@ function descargarPDF(tipo){
   }
   window.print();
 }
- 
+
 function restart(){vAnswers=new Array(VQUESTIONS.length).fill(null);eneaAnswers=Array(45).fill(null);userData={};['f-nombre','f-localidad','f-email'].forEach(id=>document.getElementById(id).value='');['f-sexo','f-fecha','f-situacion'].forEach(id=>document.getElementById(id).value='');goTo('screen-intro');}
 </script>
 </body>
