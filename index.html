@@ -350,7 +350,7 @@ body::after { content: ''; position: fixed; inset: 0; background-image: url("dat
         <span class="hcard-tag">Orientación laboral</span>
         <div class="hcard-title">Perfil Vocacional</div>
         <div class="hcard-desc">Para quienes buscan orientación sobre qué carreras, trabajos o actividades se adaptan mejor a su forma de ser, sus intereses y sus fortalezas naturales.</div>
-        <div class="hcard-cta">Comenzar test <span class="hcard-arrow">→</span> 24 preguntas</div>
+        <div class="hcard-cta">Comenzar <span class="hcard-arrow">→</span> 24 preguntas</div>
       </div>
       <div class="herramienta-card enea" onclick="goTo('screen-intro-enea')">
         <div class="hcard-accent"></div>
@@ -358,7 +358,7 @@ body::after { content: ''; position: fixed; inset: 0; background-image: url("dat
         <span class="hcard-tag">Autoconocimiento</span>
         <div class="hcard-title">Eneagrama</div>
         <div class="hcard-desc">Para quienes quieren entender su personalidad en profundidad y cómo impacta en sus relaciones, decisiones y desarrollo personal y profesional.</div>
-        <div class="hcard-cta">Comenzar test <span class="hcard-arrow">→</span> 45 preguntas</div>
+        <div class="hcard-cta">Comenzar <span class="hcard-arrow">→</span> 45 preguntas</div>
       </div>
     </div>
     <button class="btn-secondary anim-fadeup-4" onclick="goTo('screen-datos')">← Modificar mis datos</button>
@@ -382,7 +382,7 @@ body::after { content: ''; position: fixed; inset: 0; background-image: url("dat
       </div>
       <div style="background:var(--white);border:1px solid var(--border);border-left:4px solid var(--blue);padding:20px 24px;">
         <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:var(--blue2);margin-bottom:8px;">Qué vas a obtener</div>
-        <p style="font-size:14px;font-weight:300;color:var(--ink2);line-height:1.7;">Al finalizar las 24 preguntas, la IA analizará tu perfil RIASEC y generará una descripción personalizada con tus áreas vocacionales afines, fortalezas laborales y desafíos de crecimiento.</p>
+        <p style="font-size:14px;font-weight:300;color:var(--ink2);line-height:1.7;">Al finalizar las 24 preguntas, recibirás una descripción personalizada con tus áreas vocacionales afines, fortalezas laborales y desafíos de crecimiento.</p>
       </div>
     </div>
     <div style="display:flex;gap:12px;flex-wrap:wrap;" class="anim-fadeup-4">
@@ -409,7 +409,7 @@ body::after { content: ''; position: fixed; inset: 0; background-image: url("dat
       </div>
       <div style="background:var(--white);border:1px solid var(--border);border-left:4px solid var(--enea);padding:20px 24px;">
         <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:var(--enea);margin-bottom:8px;">Qué vas a obtener</div>
-        <p style="font-size:14px;font-weight:300;color:var(--ink2);line-height:1.7;">Al finalizar, la IA identificará tu tipo principal y secundario, y generará un análisis profundo con orientación vocacional, fortalezas y áreas de crecimiento personalizadas.</p>
+        <p style="font-size:14px;font-weight:300;color:var(--ink2);line-height:1.7;">Al finalizar, recibirás un análisis profundo con tu tipo principal, orientación vocacional, fortalezas y áreas de crecimiento personalizadas.</p>
       </div>
     </div>
     <div style="display:flex;gap:12px;flex-wrap:wrap;" class="anim-fadeup-4">
@@ -598,7 +598,7 @@ function prevQuestion(){if(vCurrent>0){vCurrent--;showVQ(vCurrent);}}
 
 async function submitVocacional(){
   document.getElementById('loader-ring').className='loader-ring';
-  document.getElementById('loader-text').textContent='Analizando tu perfil vocacional...';
+  document.getElementById('loader-text').textContent='Procesando tu perfil vocacional...';
   goTo('screen-loading');
 
   // Calcular puntajes RIASEC
@@ -706,7 +706,7 @@ async function submitEneagrama(){
   const top=PROFILES[topIdx];
   const secondIdx=sorted[1].i;
   document.getElementById('loader-ring').className='loader-ring enea-ring';
-  document.getElementById('loader-text').textContent='Analizando tu perfil de eneagrama...';
+  document.getElementById('loader-text').textContent='Procesando tu perfil de eneagrama...';
   goTo('screen-loading');
   const scoresSummary=sorted.map(({i,s})=>`${PROFILES[i].name}: ${s}/25`).join(', ');
   const prompt=`Sos un experto en eneagrama y orientación vocacional. Una persona completó un test de eneagrama.\n\nDATOS: Nombre: ${userData.nombre}, Sexo: ${userData.sexo}, Situación: ${userData.situacion}, Localidad: ${userData.localidad}\nPUNTAJES (máx 25 por tipo): ${scoresSummary}\nTIPO PRINCIPAL: ${top.name} (${scores[topIdx]}/25)\nTIPO SECUNDARIO: ${PROFILES[secondIdx].name} (${sorted[1].s}/25)\nDESCRIPCIÓN BASE: ${top.desc}\nORIENTACIÓN BASE: ${top.careers}\n\nGenerá un análisis profundo y personalizado. Respondé SOLO con JSON puro (sin markdown ni backticks):\n{"analisis":"3 párrafos sobre la personalidad en segunda persona, incorporando el tipo secundario si es relevante. Separados por \\n\\n","areas":["6 a 8 áreas vocacionales muy específicas y concretas"],"fortalezas":["5 fortalezas específicas del tipo en segunda persona"],"desafios":["4 desafíos de crecimiento formulados con empatía"]}`;
