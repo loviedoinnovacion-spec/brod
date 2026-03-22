@@ -301,7 +301,7 @@ body::after { content: ''; position: fixed; inset: 0; background-image: url("dat
     <span class="logo-name">Brechas y Oportunidades Digitales</span>
   </div>
   <div class="intro-eyebrow anim-fadeup-2">Herramientas de desarrollo personal</div>
-  <h1 class="intro-title anim-fadeup-3">Quién. Qué. <span>Vos.</span></h1>
+  <h1 class="intro-title anim-fadeup-3">¿Qué? ¿Quién? <span>Vos.</span></h1>
   <p class="intro-sub anim-fadeup-4">Dos herramientas para entenderte mejor y orientar tu desarrollo profesional.</p>
 
   <button class="btn-primary anim-fadeup-5" onclick="goTo('screen-datos')">Comenzar →</button>
@@ -317,19 +317,16 @@ body::after { content: ''; position: fixed; inset: 0; background-image: url("dat
 
 <!-- DATOS -->
 <div id="screen-datos" class="screen">
-  <div class="datos-wrap">
-    <div class="step-eyebrow anim-fadeup">— Paso 1 de 2 · Datos personales</div>
-    <h2 class="section-title anim-fadeup-2">Contanos sobre vos</h2>
-    <p class="section-sub anim-fadeup-3">Esta información nos ayuda a personalizar tu experiencia. No se comparte con terceros.</p>
-    <div class="form-grid anim-fadeup-3">
-      <div class="form-group full"><label class="form-label">Nombre completo</label><input class="form-input" id="f-nombre" type="text" placeholder="Tu nombre y apellido"></div>
-      <div class="form-group full"><label class="form-label">Correo electrónico</label><input class="form-input" id="f-email" type="email" placeholder="tu@email.com"></div>
-      <div class="form-group"><label class="form-label">Sexo</label><select class="form-select" id="f-sexo"><option value="">Seleccioná</option><option>Femenino</option><option>Masculino</option><option>No binario</option><option>Prefiero no decirlo</option></select></div>
-      <div class="form-group"><label class="form-label">Fecha de nacimiento</label><input class="form-input" id="f-fecha" type="text" placeholder="dd/mm/aaaa" maxlength="10" oninput="formatFecha(this)"></div>
-      <div class="form-group full"><label class="form-label">Localidad de residencia</label><input class="form-input" id="f-localidad" type="text" placeholder="Ciudad o localidad"></div>
-      <div class="form-group"><label class="form-label">Situación actual</label><select class="form-select" id="f-situacion"><option value="">Seleccioná</option><option>Ocupado/a</option><option>Desocupado/a</option><option>Estudiante</option><option>Estudiante y trabajando</option><option>Jubilado/a</option></select></div>
+  <div class="datos-wrap" style="max-width:480px;">
+    <div class="step-eyebrow anim-fadeup">— Un momento antes de empezar</div>
+    <h2 class="section-title anim-fadeup-2">¿Cómo te llamás?<br>¿Cuántos años tenés?</h2>
+    <p class="section-sub anim-fadeup-3">Solo necesitamos tres datos para personalizar tu resultado.</p>
+    <div style="display:flex;flex-direction:column;gap:14px;margin-bottom:24px;" class="anim-fadeup-3">
+      <div class="form-group"><label class="form-label">Tu nombre</label><input class="form-input" id="f-nombre" type="text" placeholder="¿Cómo te llamás?"></div>
+      <div class="form-group"><label class="form-label">Tu edad</label><input class="form-input" id="f-edad" type="number" min="10" max="99" placeholder="¿Cuántos años tenés?"></div>
+      <div class="form-group"><label class="form-label">Tu localidad</label><input class="form-input" id="f-localidad" type="text" placeholder="¿De dónde sos?"></div>
     </div>
-    <div class="datos-error" id="datos-error">Por favor completá todos los campos antes de continuar.</div>
+    <div class="datos-error" id="datos-error">Por favor completá los tres campos antes de continuar.</div>
     <div style="display:flex;gap:12px;flex-wrap:wrap;" class="anim-fadeup-4">
       <button class="btn-secondary" onclick="goTo('screen-intro')">← Volver</button>
       <button class="btn-primary" onclick="validarDatos()">Continuar →</button>
@@ -361,7 +358,7 @@ body::after { content: ''; position: fixed; inset: 0; background-image: url("dat
         <div class="hcard-cta">Comenzar <span class="hcard-arrow">→</span> 45 preguntas</div>
       </div>
     </div>
-    <button class="btn-secondary anim-fadeup-4" onclick="goTo('screen-datos')">← Modificar mis datos</button>
+    <button class="btn-secondary anim-fadeup-4" onclick="goTo('screen-datos')">← Volver</button>
   </div>
 </div>
 
@@ -459,6 +456,22 @@ body::after { content: ''; position: fixed; inset: 0; background-image: url("dat
   <div class="loader-text" id="loader-text">Analizando tu perfil...</div>
 </div>
 
+<!-- CAPTURA EMAIL -->
+<div id="screen-email" class="screen">
+  <div class="datos-wrap" style="max-width:480px;text-align:center;">
+    <div class="step-eyebrow anim-fadeup" style="text-align:center;">— Tu resultado está listo</div>
+    <h2 class="section-title anim-fadeup-2" style="text-align:center;">¿Querés recibirlo<br>por email?</h2>
+    <p class="section-sub anim-fadeup-3" style="text-align:center;">Dejanos tu correo y te mandamos tu informe completo. Es opcional — podés saltearlo si preferís.</p>
+    <div style="display:flex;flex-direction:column;gap:14px;margin-bottom:24px;" class="anim-fadeup-3">
+      <div class="form-group"><label class="form-label">Tu correo electrónico</label><input class="form-input" id="f-email" type="email" placeholder="tu@email.com"></div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:12px;align-items:center;" class="anim-fadeup-4">
+      <button class="btn-primary" style="width:100%;" onclick="guardarEmailYMostrar()">Enviar y ver mi resultado →</button>
+      <button class="btn-secondary" style="width:100%;" onclick="saltearEmail()">Ver mi resultado sin dejar email</button>
+    </div>
+  </div>
+</div>
+
 <!-- RESULTADO VOCACIONAL -->
 <div id="screen-result" class="screen" style="flex-direction:column;">
   <div class="result-hero">
@@ -514,12 +527,67 @@ function goTo(id){document.querySelectorAll('.screen').forEach(s=>s.classList.re
 
 let userData={};
 function validarDatos(){
-  const n=document.getElementById('f-nombre').value.trim(),em=document.getElementById('f-email').value.trim(),sx=document.getElementById('f-sexo').value,fe=document.getElementById('f-fecha').value.trim(),lo=document.getElementById('f-localidad').value.trim(),si=document.getElementById('f-situacion').value;
-  if(!n||!em||!sx||!fe||!lo||!si){document.getElementById('datos-error').style.display='block';return;}
+  const n=document.getElementById('f-nombre').value.trim();
+  const edad=document.getElementById('f-edad').value.trim();
+  const lo=document.getElementById('f-localidad').value.trim();
+  if(!n||!edad||!lo){document.getElementById('datos-error').style.display='block';return;}
   document.getElementById('datos-error').style.display='none';
-  userData={nombre:n,email:em,sexo:sx,fecha:fe,localidad:lo,situacion:si};
+  userData={nombre:n,edad:edad,localidad:lo,email:''};
   document.getElementById('eleccion-saludo').textContent=`¡Hola, ${n.split(' ')[0]}!`;
   goTo('screen-eleccion');
+}
+
+// Pantalla email al final
+let _pendingResult = null;
+let _pendingTipo = null;
+
+function mostrarEmailAntes(result, tipo) {
+  _pendingResult = result;
+  _pendingTipo = tipo;
+  goTo('screen-email');
+}
+
+function guardarEmailYMostrar() {
+  const em = document.getElementById('f-email').value.trim();
+  if(em) userData.email = em;
+  mostrarResultadoFinal();
+}
+
+function saltearEmail() {
+  mostrarResultadoFinal();
+}
+
+function mostrarResultadoFinal() {
+  if(_pendingTipo === 'vocacional') {
+    const r = _pendingResult;
+    goTo('screen-result');
+    document.getElementById('result-title').textContent=r.titulo||'—';
+    document.getElementById('result-subtitle').textContent=r.subtitulo||'';
+    document.getElementById('result-desc').innerHTML=(r.descripcion||'').split('\n\n').map(p=>`<p>${p}</p>`).join('');
+    document.getElementById('result-areas').innerHTML=(r.areas||[]).map(a=>`<div class="area-chip"><div class="area-dot"></div><span class="area-name">${a}</span></div>`).join('');
+    document.getElementById('result-strengths').innerHTML=(r.fortalezas||[]).map(f=>`<div class="strength-item"><span class="strength-icon">✦</span><span>${f}</span></div>`).join('');
+    document.getElementById('result-challenges').innerHTML=(r.desafios||[]).map(d=>`<div class="challenge-item"><span class="challenge-icon">◇</span><span>${d}</span></div>`).join('');
+    const riasecEl=document.getElementById('result-riasec');
+    if(riasecEl&&r._riasec){
+      const sortedR=Object.entries(r._riasec).sort((a,b)=>b[1]-a[1]);
+      const maxR=Math.max(...Object.values(r._riasec));
+      riasecEl.innerHTML=sortedR.map(([k,v])=>`<div class="score-row"><div class="score-label">${RIASEC_LABELS[k].name}</div><div class="score-bar-wrap"><div class="score-bar-fill" style="width:${maxR>0?(v/maxR)*100:0}%;background:${v===maxR?'var(--blue)':'#93c5fd'}"></div></div><div class="score-val">${v}/${r._total}</div></div>`).join('');
+    }
+    fetch('/.netlify/functions/analyze',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({guardar:{...userData,herramienta:'Perfil Vocacional',perfil:r.titulo||'Sin titulo'}})}).catch(()=>{});
+  } else {
+    const {r,top,sorted,topIdx,scores} = _pendingResult;
+    goTo('screen-enea-result');
+    document.getElementById('enea-emoji').textContent=top.emoji;
+    document.getElementById('enea-result-name').textContent=top.name;
+    document.getElementById('enea-result-name').style.color='white';
+    document.getElementById('enea-result-sub').textContent=top.desc;
+    document.getElementById('enea-result-desc').innerHTML=(r.analisis||'').split('\n\n').map(p=>`<p>${p}</p>`).join('');
+    document.getElementById('enea-result-areas').innerHTML=(r.areas||[]).map(a=>`<div class="area-chip"><div class="area-dot" style="background:${top.color}"></div><span class="area-name">${a}</span></div>`).join('');
+    document.getElementById('enea-result-strengths').innerHTML=(r.fortalezas||[]).map(f=>`<div class="strength-item"><span class="strength-icon">✦</span><span>${f}</span></div>`).join('');
+    document.getElementById('enea-result-challenges').innerHTML=(r.desafios||[]).map(d=>`<div class="challenge-item"><span class="challenge-icon">◇</span><span>${d}</span></div>`).join('');
+    fetch('/.netlify/functions/analyze',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({guardar:{...userData,herramienta:'Eneagrama',perfil:top.name}})}).catch(()=>{});
+    document.getElementById('enea-scores').innerHTML=sorted.map(({i,s})=>`<div class="score-row"><div class="score-label">${PROFILES[i].emoji} ${PROFILES[i].name}</div><div class="score-bar-wrap"><div class="score-bar-fill" style="width:${(s/25)*100}%;background:${i===topIdx?PROFILES[i].color:'#e5e7eb'}"></div></div><div class="score-val">${s}/25</div></div>`).join('');
+  }
 }
 
 // ── DIMENSIONES RIASEC ──
@@ -612,7 +680,7 @@ async function submitVocacional(){
 
   const prompt=`Sos un experto en orientación vocacional basada en el modelo Holland/RIASEC. Una persona completó un test vocacional y estos son sus resultados por dimensión.
 
-DATOS: Nombre: ${userData.nombre}, Sexo: ${userData.sexo}, Situación: ${userData.situacion}, Localidad: ${userData.localidad}
+DATOS: Nombre: ${userData.nombre}, Edad: ${userData.edad} años, Localidad: ${userData.localidad}
 
 PUNTAJES RIASEC (sobre ${total} respuestas):
 ${scoresSummary}
@@ -627,26 +695,9 @@ Generá un perfil profesional personalizado y profundo basado en estas dimension
     const res=await fetch("/.netlify/functions/analyze",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({prompt,max_tokens:1000})});
     const data=await res.json();
     const r=JSON.parse(data.content.map(c=>c.text||'').join('').replace(/```json|```/g,'').trim());
-    goTo('screen-result');
-    document.getElementById('result-title').textContent=r.titulo||'—';
-    document.getElementById('result-subtitle').textContent=r.subtitulo||'';
-    document.getElementById('result-desc').innerHTML=(r.descripcion||'').split('\n\n').map(p=>`<p>${p}</p>`).join('');
-    document.getElementById('result-areas').innerHTML=(r.areas||[]).map(a=>`<div class="area-chip"><div class="area-dot"></div><span class="area-name">${a}</span></div>`).join('');
-    document.getElementById('result-strengths').innerHTML=(r.fortalezas||[]).map(f=>`<div class="strength-item"><span class="strength-icon">✦</span><span>${f}</span></div>`).join('');
-    document.getElementById('result-challenges').innerHTML=(r.desafios||[]).map(d=>`<div class="challenge-item"><span class="challenge-icon">◇</span><span>${d}</span></div>`).join('');
-    // Mostrar puntajes RIASEC
-    const riasecEl = document.getElementById('result-riasec');
-    if(riasecEl){
-      const sortedR = Object.entries(riasec).sort((a,b)=>b[1]-a[1]);
-      const maxR = Math.max(...Object.values(riasec));
-      riasecEl.innerHTML = sortedR.map(([k,v])=>`
-        <div class="score-row">
-          <div class="score-label">${RIASEC_LABELS[k].name}</div>
-          <div class="score-bar-wrap"><div class="score-bar-fill" style="width:${maxR>0?(v/maxR)*100:0}%;background:${v===maxR?'var(--blue)':'#93c5fd'}"></div></div>
-          <div class="score-val">${v}/${total}</div>
-        </div>`).join('');
-    }
-    fetch("/.netlify/functions/analyze",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({guardar:{...userData,herramienta:"Perfil Vocacional",perfil:r.titulo||'Sin titulo'}})}).catch(()=>{});
+    r._riasec = riasec;
+    r._total = total;
+    mostrarEmailAntes(r, 'vocacional');
   }catch(err){goTo('screen-result');document.getElementById('result-title').textContent='Error';document.getElementById('result-desc').innerHTML=`<div class="error-box">${err.message}</div>`;}
 }
 
@@ -709,22 +760,12 @@ async function submitEneagrama(){
   document.getElementById('loader-text').textContent='Procesando tu perfil de eneagrama...';
   goTo('screen-loading');
   const scoresSummary=sorted.map(({i,s})=>`${PROFILES[i].name}: ${s}/25`).join(', ');
-  const prompt=`Sos un experto en eneagrama y orientación vocacional. Una persona completó un test de eneagrama.\n\nDATOS: Nombre: ${userData.nombre}, Sexo: ${userData.sexo}, Situación: ${userData.situacion}, Localidad: ${userData.localidad}\nPUNTAJES (máx 25 por tipo): ${scoresSummary}\nTIPO PRINCIPAL: ${top.name} (${scores[topIdx]}/25)\nTIPO SECUNDARIO: ${PROFILES[secondIdx].name} (${sorted[1].s}/25)\nDESCRIPCIÓN BASE: ${top.desc}\nORIENTACIÓN BASE: ${top.careers}\n\nGenerá un análisis profundo y personalizado. Respondé SOLO con JSON puro (sin markdown ni backticks):\n{"analisis":"3 párrafos sobre la personalidad en segunda persona, incorporando el tipo secundario si es relevante. Separados por \\n\\n","areas":["6 a 8 áreas vocacionales muy específicas y concretas"],"fortalezas":["5 fortalezas específicas del tipo en segunda persona"],"desafios":["4 desafíos de crecimiento formulados con empatía"]}`;
+  const prompt=`Sos un experto en eneagrama y orientación vocacional. Una persona completó un test de eneagrama.\n\nDATOS: Nombre: ${userData.nombre}, Edad: ${userData.edad} años, Localidad: ${userData.localidad}\nPUNTAJES (máx 25 por tipo): ${scoresSummary}\nTIPO PRINCIPAL: ${top.name} (${scores[topIdx]}/25)\nTIPO SECUNDARIO: ${PROFILES[secondIdx].name} (${sorted[1].s}/25)\nDESCRIPCIÓN BASE: ${top.desc}\nORIENTACIÓN BASE: ${top.careers}\n\nGenerá un análisis profundo y personalizado. Respondé SOLO con JSON puro (sin markdown ni backticks):\n{"analisis":"3 párrafos sobre la personalidad en segunda persona, incorporando el tipo secundario si es relevante. Separados por \\n\\n","areas":["6 a 8 áreas vocacionales muy específicas y concretas"],"fortalezas":["5 fortalezas específicas del tipo en segunda persona"],"desafios":["4 desafíos de crecimiento formulados con empatía"]}`;
   try{
     const res=await fetch("/.netlify/functions/analyze",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({prompt,max_tokens:1200})});
     const data=await res.json();
     const r=JSON.parse(data.content.map(c=>c.text||'').join('').replace(/```json|```/g,'').trim());
-    goTo('screen-enea-result');
-    document.getElementById('enea-emoji').textContent=top.emoji;
-    document.getElementById('enea-result-name').textContent=top.name;
-    document.getElementById('enea-result-name').style.color='white';
-    document.getElementById('enea-result-sub').textContent=top.desc;
-    document.getElementById('enea-result-desc').innerHTML=(r.analisis||'').split('\n\n').map(p=>`<p>${p}</p>`).join('');
-    document.getElementById('enea-result-areas').innerHTML=(r.areas||[]).map(a=>`<div class="area-chip"><div class="area-dot" style="background:${top.color}"></div><span class="area-name">${a}</span></div>`).join('');
-    document.getElementById('enea-result-strengths').innerHTML=(r.fortalezas||[]).map(f=>`<div class="strength-item"><span class="strength-icon">✦</span><span>${f}</span></div>`).join('');
-    document.getElementById('enea-result-challenges').innerHTML=(r.desafios||[]).map(d=>`<div class="challenge-item"><span class="challenge-icon">◇</span><span>${d}</span></div>`).join('');
-    fetch("/.netlify/functions/analyze",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({guardar:{...userData,herramienta:"Eneagrama",perfil:top.name}})}).catch(()=>{});
-    document.getElementById('enea-scores').innerHTML=sorted.map(({i,s})=>`<div class="score-row"><div class="score-label">${PROFILES[i].emoji} ${PROFILES[i].name}</div><div class="score-bar-wrap"><div class="score-bar-fill" style="width:${(s/25)*100}%;background:${i===topIdx?PROFILES[i].color:'#e5e7eb'}"></div></div><div class="score-val">${s}/25</div></div>`).join('');
+    mostrarEmailAntes({r,top,sorted,topIdx,scores}, 'eneagrama');
   }catch(err){goTo('screen-enea-result');document.getElementById('enea-result-name').textContent='Error';document.getElementById('enea-result-desc').innerHTML=`<div class="error-box">${err.message}</div>`;}
 }
 
@@ -739,7 +780,7 @@ function descargarPDF(tipo){
     const areas=Array.from(document.querySelectorAll('#result-areas .area-name')).map(a=>a.textContent);
     const fortalezas=Array.from(document.querySelectorAll('#result-strengths .strength-item span:last-child')).map(a=>a.textContent);
     const desafios=Array.from(document.querySelectorAll('#result-challenges .challenge-item span:last-child')).map(a=>a.textContent);
-    pdf.innerHTML=`<div class="pdf-header"><div class="pdf-logo">Espacio BrOD · Perfil Vocacional</div><div class="pdf-title">${titulo}</div><div class="pdf-sub">${subtitulo}</div><div class="pdf-datos">${u.nombre} · ${u.email} · ${u.localidad} · ${u.situacion}</div></div><div class="pdf-section"><div class="pdf-section-label">— Descripción general</div><div class="pdf-text">${desc}</div></div><div class="pdf-section"><div class="pdf-section-label">— Áreas vocacionales afines</div><div class="pdf-chips">${areas.map(a=>`<div class="pdf-chip">${a}</div>`).join('')}</div></div><div class="pdf-section"><div class="pdf-section-label">— Fortalezas laborales</div>${fortalezas.map(f=>`<div class="pdf-list-item">✦ ${f}</div>`).join('')}</div><div class="pdf-section"><div class="pdf-section-label">— Desafíos a trabajar</div>${desafios.map(d=>`<div class="pdf-list-item">◇ ${d}</div>`).join('')}</div><div class="pdf-footer">Espacio BrOD - Brechas y Oportunidades Digitales · ${new Date().toLocaleDateString("es-AR")} | BROD – De la brecha digital a nuevas oportunidades laborales</div>`;
+    pdf.innerHTML=`<div class="pdf-header"><div class="pdf-logo">Espacio BrOD · Perfil Vocacional</div><div class="pdf-title">${titulo}</div><div class="pdf-sub">${subtitulo}</div><div class="pdf-datos">${u.nombre} · ${u.edad} años · ${u.localidad}</div></div><div class="pdf-section"><div class="pdf-section-label">— Descripción general</div><div class="pdf-text">${desc}</div></div><div class="pdf-section"><div class="pdf-section-label">— Áreas vocacionales afines</div><div class="pdf-chips">${areas.map(a=>`<div class="pdf-chip">${a}</div>`).join('')}</div></div><div class="pdf-section"><div class="pdf-section-label">— Fortalezas laborales</div>${fortalezas.map(f=>`<div class="pdf-list-item">✦ ${f}</div>`).join('')}</div><div class="pdf-section"><div class="pdf-section-label">— Desafíos a trabajar</div>${desafios.map(d=>`<div class="pdf-list-item">◇ ${d}</div>`).join('')}</div><div class="pdf-footer">Espacio BrOD - Brechas y Oportunidades Digitales · ${new Date().toLocaleDateString("es-AR")} | BROD – De la brecha digital a nuevas oportunidades laborales</div>`;
   }else{
     const nombre=document.getElementById('enea-result-name').textContent;
     const sub=document.getElementById('enea-result-sub').textContent;
@@ -748,12 +789,12 @@ function descargarPDF(tipo){
     const fortalezas=Array.from(document.querySelectorAll('#enea-result-strengths .strength-item span:last-child')).map(a=>a.textContent);
     const desafios=Array.from(document.querySelectorAll('#enea-result-challenges .challenge-item span:last-child')).map(a=>a.textContent);
     const scores=Array.from(document.querySelectorAll('#enea-scores .score-row')).map(r=>({label:r.querySelector('.score-label').textContent,val:r.querySelector('.score-val').textContent,width:r.querySelector('.score-bar-fill').style.width,color:r.querySelector('.score-bar-fill').style.background}));
-    pdf.innerHTML=`<div class="pdf-header"><div class="pdf-logo">Espacio BrOD · Eneagrama</div><div class="pdf-title">${nombre}</div><div class="pdf-sub">${sub}</div><div class="pdf-datos">${u.nombre} · ${u.email} · ${u.localidad} · ${u.situacion}</div></div><div class="pdf-section"><div class="pdf-section-label">— Análisis de tu personalidad</div><div class="pdf-text">${desc}</div></div><div class="pdf-section"><div class="pdf-section-label">— Orientación vocacional</div><div class="pdf-chips">${areas.map(a=>`<div class="pdf-chip">${a}</div>`).join('')}</div></div><div class="pdf-section"><div class="pdf-section-label">— Fortalezas</div>${fortalezas.map(f=>`<div class="pdf-list-item">✦ ${f}</div>`).join('')}</div><div class="pdf-section"><div class="pdf-section-label">— Áreas de crecimiento</div>${desafios.map(d=>`<div class="pdf-list-item">◇ ${d}</div>`).join('')}</div><div class="pdf-section"><div class="pdf-section-label">— Puntajes por tipo</div>${scores.map(s=>`<div class="pdf-score-row"><div class="pdf-score-label">${s.label}</div><div class="pdf-score-bar-wrap"><div class="pdf-score-bar" style="width:${s.width};background:${s.color}"></div></div><div class="pdf-score-val">${s.val}</div></div>`).join('')}</div><div class="pdf-footer">Espacio BrOD - Brechas y Oportunidades Digitales · ${new Date().toLocaleDateString("es-AR")} | BROD – De la brecha digital a nuevas oportunidades laborales</div>`;
+    pdf.innerHTML=`<div class="pdf-header"><div class="pdf-logo">Espacio BrOD · Eneagrama</div><div class="pdf-title">${nombre}</div><div class="pdf-sub">${sub}</div><div class="pdf-datos">${u.nombre} · ${u.edad} años · ${u.localidad}</div></div><div class="pdf-section"><div class="pdf-section-label">— Análisis de tu personalidad</div><div class="pdf-text">${desc}</div></div><div class="pdf-section"><div class="pdf-section-label">— Orientación vocacional</div><div class="pdf-chips">${areas.map(a=>`<div class="pdf-chip">${a}</div>`).join('')}</div></div><div class="pdf-section"><div class="pdf-section-label">— Fortalezas</div>${fortalezas.map(f=>`<div class="pdf-list-item">✦ ${f}</div>`).join('')}</div><div class="pdf-section"><div class="pdf-section-label">— Áreas de crecimiento</div>${desafios.map(d=>`<div class="pdf-list-item">◇ ${d}</div>`).join('')}</div><div class="pdf-section"><div class="pdf-section-label">— Puntajes por tipo</div>${scores.map(s=>`<div class="pdf-score-row"><div class="pdf-score-label">${s.label}</div><div class="pdf-score-bar-wrap"><div class="pdf-score-bar" style="width:${s.width};background:${s.color}"></div></div><div class="pdf-score-val">${s.val}</div></div>`).join('')}</div><div class="pdf-footer">Espacio BrOD - Brechas y Oportunidades Digitales · ${new Date().toLocaleDateString("es-AR")} | BROD – De la brecha digital a nuevas oportunidades laborales</div>`;
   }
   window.print();
 }
 
-function restart(){vAnswers=new Array(VQUESTIONS.length).fill(null);eneaAnswers=Array(45).fill(null);userData={};['f-nombre','f-localidad','f-email'].forEach(id=>document.getElementById(id).value='');['f-sexo','f-fecha','f-situacion'].forEach(id=>document.getElementById(id).value='');goTo('screen-intro');}
+function restart(){vAnswers=new Array(VQUESTIONS.length).fill(null);eneaAnswers=Array(45).fill(null);userData={};['f-nombre','f-localidad','f-email','f-edad'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});goTo('screen-intro');}
 </script>
 </body>
 </html>
