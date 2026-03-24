@@ -355,7 +355,7 @@ body::after { content: ''; position: fixed; inset: 0; background-image: url("dat
         <span class="hcard-tag">Autoconocimiento</span>
         <div class="hcard-title">Eneagrama</div>
         <div class="hcard-desc">Para quienes quieren entender su personalidad en profundidad y cómo impacta en sus relaciones, decisiones y desarrollo personal y profesional.</div>
-        <div class="hcard-cta">Comenzar <span class="hcard-arrow">→</span> 45 preguntas</div>
+        <div class="hcard-cta">Comenzar <span class="hcard-arrow">→</span> 40 preguntas</div>
       </div>
     </div>
     <button class="btn-secondary anim-fadeup-4" onclick="goTo('screen-datos')">← Volver</button>
@@ -402,7 +402,7 @@ body::after { content: ''; position: fixed; inset: 0; background-image: url("dat
       </div>
       <div style="background:var(--white);border:1px solid var(--border);border-left:4px solid var(--enea);padding:20px 24px;">
         <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:var(--enea);margin-bottom:8px;">Cómo responder</div>
-        <p style="font-size:14px;font-weight:300;color:var(--ink2);line-height:1.7;">Vas a ver 45 afirmaciones divididas en 9 bloques. Para cada una, indicá <strong>del 1 al 5</strong> qué tan identificado/a te sentís: 1 = "Nada que ver conmigo" y 5 = "Muy yo". Respondé según cómo sos en general, no en un momento puntual.</p>
+        <p style="font-size:14px;font-weight:300;color:var(--ink2);line-height:1.7;">Vas a ver 40 afirmaciones divididas en 3 bloques. Para cada una, indicá <strong>del 1 al 5</strong> qué tan identificado/a te sentís: 1 = "Nada que ver conmigo" y 5 = "Muy yo". Respondé según cómo sos en general, no en un momento puntual.</p>
       </div>
       <div style="background:var(--white);border:1px solid var(--border);border-left:4px solid var(--enea);padding:20px 24px;">
         <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:var(--enea);margin-bottom:8px;">Qué vas a obtener</div>
@@ -704,7 +704,7 @@ async function submitVocacional(){
   const topDim = sorted[0][0];
   const secondDim = sorted[1][0];
 
-  const prompt=`Sos un experto en orientación vocacional basada en el modelo Holland/RIASEC. Una persona completó un test vocacional y estos son sus resultados por dimensión.
+  const prompt=`Sos un experto en orientación vocacional basada en el modelo Holland/RIASEC, con profundo conocimiento del mercado laboral argentino. Una persona completó un test vocacional y estos son sus resultados por dimensión.
 
 DATOS: Nombre: ${userData.nombre}, Edad: ${userData.edad} años, Localidad: ${userData.localidad}
 
@@ -715,7 +715,7 @@ DIMENSIÓN PRINCIPAL: ${RIASEC_LABELS[topDim].name} — ${RIASEC_LABELS[topDim].
 DIMENSIÓN SECUNDARIA: ${RIASEC_LABELS[secondDim].name} — ${RIASEC_LABELS[secondDim].desc}
 PERFIL TOP 3: ${top3}
 
-Generá un perfil profesional personalizado y profundo basado en estas dimensiones. Respondé SOLO con JSON puro (sin markdown ni backticks):
+Generá un perfil profesional personalizado basado en estas dimensiones. Las áreas vocacionales y carreras sugeridas deben estar orientadas al mercado laboral argentino: mencioná carreras disponibles en universidades públicas de Argentina (UBA, UNC, UNLP, etc.), sectores en crecimiento en el país, salidas laborales concretas en el contexto argentino, y considerá la situación laboral indicada. Respondé SOLO con JSON puro (sin markdown ni backticks):
 {"titulo":"Nombre del perfil vocacional","subtitulo":"Frase que capture la esencia laboral","descripcion":"3 párrafos en segunda persona separados por \\n\\n","area_principal":"Nombre del área vocacional que mejor encaja con este perfil (1 sola, específica)","area_principal_desc":"2-3 oraciones explicando por qué esta área encaja con el perfil de la persona, en segunda persona","areas":["5 a 6 áreas vocacionales adicionales concretas, sin repetir el área principal"],"fortalezas":["5 fortalezas laborales en segunda persona"],"desafios":["4 desafíos de crecimiento con empatía"]}`;
   try{
     const res=await fetch("/.netlify/functions/analyze",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({prompt,max_tokens:1000})});
@@ -821,7 +821,7 @@ async function submitEneagrama(){
   document.getElementById('loader-text').textContent='Procesando tu perfil de eneagrama...';
   goTo('screen-loading');
   const maxPorTipo=ENEA_SECTIONS.map(s=>s.questions.length*5);const scoresSummary=sorted.map(({i,s})=>`${PROFILES[i].name}: ${s}/${maxPorTipo[i]}`).join(', ');
-  const prompt=`Sos un experto en eneagrama y orientación vocacional. Una persona completó un test de eneagrama.\n\nDATOS: Nombre: ${userData.nombre}, Edad: ${userData.edad} años, Localidad: ${userData.localidad}\nPUNTAJES (máx 25 por tipo): ${scoresSummary}\nTIPO PRINCIPAL: ${top.name} (${scores[topIdx]}/25)\nTIPO SECUNDARIO: ${PROFILES[secondIdx].name} (${sorted[1].s}/25)\nDESCRIPCIÓN BASE: ${top.desc}\nORIENTACIÓN BASE: ${top.careers}\n\nGenerá un análisis profundo y personalizado. Respondé SOLO con JSON puro (sin markdown ni backticks):\n{"analisis":"3 párrafos sobre la personalidad en segunda persona, incorporando el tipo secundario. Separados por \\n\\n","area_principal":"Nombre del área vocacional que mejor encaja con este tipo de eneagrama (1 sola, específica)","area_principal_desc":"2-3 oraciones explicando por qué esta área encaja con la personalidad de esta persona, en segunda persona","areas":["5 a 6 áreas vocacionales adicionales, sin repetir el área principal"],"fortalezas":["5 fortalezas específicas del tipo en segunda persona"],"desafios":["4 desafíos de crecimiento formulados con empatía"]}`;
+  const prompt=`Sos un experto en eneagrama y orientación vocacional, con profundo conocimiento del mercado laboral argentino. Una persona completó un test de eneagrama.\n\nDATOS: Nombre: ${userData.nombre}, Edad: ${userData.edad} años, Localidad: ${userData.localidad}\nPUNTAJES (máx 25 por tipo): ${scoresSummary}\nTIPO PRINCIPAL: ${top.name} (${scores[topIdx]}/25)\nTIPO SECUNDARIO: ${PROFILES[secondIdx].name} (${sorted[1].s}/25)\nDESCRIPCIÓN BASE: ${top.desc}\nORIENTACIÓN BASE: ${top.careers}\n\nGenerá un análisis profundo y personalizado. Las áreas vocacionales sugeridas deben estar orientadas al mercado laboral argentino: mencioná carreras disponibles en universidades públicas (UBA, UNC, UNLP, etc.), sectores en crecimiento en Argentina y salidas laborales concretas en el contexto local. Respondé SOLO con JSON puro (sin markdown ni backticks):\n{"analisis":"3 párrafos sobre la personalidad en segunda persona, incorporando el tipo secundario. Separados por \\n\\n","area_principal":"Nombre del área vocacional que mejor encaja con este tipo de eneagrama (1 sola, específica)","area_principal_desc":"2-3 oraciones explicando por qué esta área encaja con la personalidad de esta persona, en segunda persona","areas":["5 a 6 áreas vocacionales adicionales, sin repetir el área principal"],"fortalezas":["5 fortalezas específicas del tipo en segunda persona"],"desafios":["4 desafíos de crecimiento formulados con empatía"]}`;
   try{
     const res=await fetch("/.netlify/functions/analyze",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({prompt,max_tokens:1200})});
     const data=await res.json();
