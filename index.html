@@ -724,7 +724,7 @@ Generá un perfil profesional personalizado basado en estas dimensiones. Las ár
     r._riasec = riasec;
     r._total = total;
     mostrarEmailAntes(r, 'vocacional');
-  }catch(err){goTo('screen-result');document.getElementById('result-title').textContent='Error';document.getElementById('result-desc').innerHTML=`<div class="error-box">${err.message}</div>`;}
+  }catch(err){goTo('screen-result');document.getElementById('result-title').textContent='Algo salió mal';document.getElementById('result-subtitle').textContent='Hubo un problema al procesar tu perfil.';document.getElementById('result-desc').innerHTML=`<div class="error-box">${err.message}<br><br><button onclick="submitVocacional()" style="margin-top:12px;background:var(--blue);color:white;border:none;padding:12px 28px;font-family:Outfit,sans-serif;font-size:13px;font-weight:600;cursor:pointer;">↺ Reintentar</button></div>`;}
 }
 
 const SCALE_LABELS=["Nada que ver conmigo","Poco","A veces","Bastante","Muy yo"];
@@ -827,7 +827,7 @@ async function submitEneagrama(){
     const data=await res.json();
     const r=JSON.parse(data.content.map(c=>c.text||'').join('').replace(/```json|```/g,'').trim());
     mostrarEmailAntes({r,top,sorted,topIdx,scores}, 'eneagrama');
-  }catch(err){goTo('screen-enea-result');document.getElementById('enea-result-name').textContent='Error';document.getElementById('enea-result-desc').innerHTML=`<div class="error-box">${err.message}</div>`;}
+  }catch(err){goTo('screen-enea-result');document.getElementById('enea-result-name').textContent='Algo salió mal';document.getElementById('enea-result-sub').textContent='Hubo un problema al procesar tu perfil.';document.getElementById('enea-result-desc').innerHTML=`<div class="error-box">${err.message}<br><br><button onclick="submitEneagrama()" style="margin-top:12px;background:var(--enea);color:white;border:none;padding:12px 28px;font-family:Outfit,sans-serif;font-size:13px;font-weight:600;cursor:pointer;">↺ Reintentar</button></div>`;}
 }
 
 function formatFecha(input){let v=input.value.replace(/\D/g,'');if(v.length>=3&&v.length<=4)v=v.slice(0,2)+'/'+v.slice(2);else if(v.length>=5)v=v.slice(0,2)+'/'+v.slice(2,4)+'/'+v.slice(4,8);input.value=v;}
