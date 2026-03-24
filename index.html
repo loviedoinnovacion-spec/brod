@@ -464,6 +464,7 @@ body::after { content: ''; position: fixed; inset: 0; background-image: url("dat
     <p class="section-sub anim-fadeup-3" style="text-align:center;">Suscribite para recibir contenido sobre desarrollo profesional de parte de Espacio BrOD. Es opcional — podés saltearlo si preferís.</p>
     <div style="display:flex;flex-direction:column;gap:14px;margin-bottom:24px;" class="anim-fadeup-3">
       <div class="form-group"><label class="form-label">Tu correo electrónico</label><input class="form-input" id="f-email" type="email" placeholder="tu@email.com"></div>
+      <div id="email-error" style="display:none;font-size:12px;color:var(--danger);background:#fef2f2;padding:10px 14px;border-left:3px solid var(--danger);">Por favor ingresá tu correo para suscribirte.</div>
     </div>
     <div style="display:flex;flex-direction:column;gap:12px;align-items:center;" class="anim-fadeup-4">
       <button class="btn-primary" style="width:100%;" onclick="guardarEmailYMostrar()">Suscribirme y ver mi resultado →</button>
@@ -481,7 +482,16 @@ body::after { content: ''; position: fixed; inset: 0; background-image: url("dat
   </div>
   <div class="result-body">
     <div class="result-section"><div class="section-label">— Descripción general</div><div class="result-card" id="result-desc">—</div></div>
-    <div class="result-section"><div class="section-label">— Áreas vocacionales afines</div><div class="areas-grid" id="result-areas"></div></div>
+    <div class="result-section">
+      <div class="section-label">— Tu área vocacional principal</div>
+      <div id="result-area-principal" style="background:var(--blue);color:white;padding:24px 28px;margin-bottom:12px;">
+        <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.7);margin-bottom:8px;">🏆 Mejor match para vos</div>
+        <div style="font-family:'Playfair Display',serif;font-size:22px;font-weight:700;margin-bottom:8px;" id="result-area-nombre">—</div>
+        <div style="font-size:13px;font-weight:300;line-height:1.7;color:rgba(255,255,255,0.9);" id="result-area-desc">—</div>
+      </div>
+      <div class="section-label" style="margin-top:20px;">— Otras áreas afines</div>
+      <div class="areas-grid" id="result-areas"></div>
+    </div>
     <div class="result-section"><div class="section-label">— Fortalezas laborales</div><div class="strengths-list" id="result-strengths"></div></div>
     <div class="result-section"><div class="section-label">— Desafíos a trabajar</div><div class="challenges-list" id="result-challenges"></div></div>
     <div class="result-section"><div class="section-label">— Tu perfil RIASEC</div><div class="scores-grid" id="result-riasec"></div></div>
@@ -505,7 +515,16 @@ body::after { content: ''; position: fixed; inset: 0; background-image: url("dat
   </div>
   <div class="enea-body">
     <div class="result-section"><div class="section-label enea-label">— Análisis de tu personalidad</div><div class="result-card" style="border-left-color:var(--enea);" id="enea-result-desc">—</div></div>
-    <div class="result-section"><div class="section-label enea-label">— Orientación vocacional</div><div class="areas-grid" id="enea-result-areas"></div></div>
+    <div class="result-section">
+      <div class="section-label enea-label">— Tu área vocacional principal</div>
+      <div id="enea-area-principal" style="background:var(--enea);color:white;padding:24px 28px;margin-bottom:12px;">
+        <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.7);margin-bottom:8px;">🏆 Mejor match para vos</div>
+        <div style="font-family:'Playfair Display',serif;font-size:22px;font-weight:700;margin-bottom:8px;" id="enea-area-nombre">—</div>
+        <div style="font-size:13px;font-weight:300;line-height:1.7;color:rgba(255,255,255,0.9);" id="enea-area-desc">—</div>
+      </div>
+      <div class="section-label enea-label" style="margin-top:20px;">— Otras áreas afines</div>
+      <div class="areas-grid" id="enea-result-areas"></div>
+    </div>
     <div class="result-section"><div class="section-label enea-label">— Tus fortalezas</div><div class="strengths-list" id="enea-result-strengths"></div></div>
     <div class="result-section"><div class="section-label enea-label">— Áreas de crecimiento</div><div class="challenges-list" id="enea-result-challenges"></div></div>
     <div class="result-section"><div class="section-label enea-label">— Puntajes por tipo</div><div class="scores-grid" id="enea-scores"></div></div>
@@ -549,7 +568,12 @@ function mostrarEmailAntes(result, tipo) {
 
 function guardarEmailYMostrar() {
   const em = document.getElementById('f-email').value.trim();
-  if(em) userData.email = em;
+  if(!em) {
+    document.getElementById('email-error').style.display='block';
+    return;
+  }
+  document.getElementById('email-error').style.display='none';
+  userData.email = em;
   mostrarResultadoFinal();
 }
 
@@ -564,6 +588,7 @@ function mostrarResultadoFinal() {
     document.getElementById('result-title').textContent=r.titulo||'—';
     document.getElementById('result-subtitle').textContent=r.subtitulo||'';
     document.getElementById('result-desc').innerHTML=(r.descripcion||'').split('\n\n').map(p=>`<p>${p}</p>`).join('');
+    if(r.area_principal){document.getElementById('result-area-nombre').textContent=r.area_principal;document.getElementById('result-area-desc').textContent=r.area_principal_desc||'';}
     document.getElementById('result-areas').innerHTML=(r.areas||[]).map(a=>`<div class="area-chip"><div class="area-dot"></div><span class="area-name">${a}</span></div>`).join('');
     document.getElementById('result-strengths').innerHTML=(r.fortalezas||[]).map(f=>`<div class="strength-item"><span class="strength-icon">✦</span><span>${f}</span></div>`).join('');
     document.getElementById('result-challenges').innerHTML=(r.desafios||[]).map(d=>`<div class="challenge-item"><span class="challenge-icon">◇</span><span>${d}</span></div>`).join('');
@@ -582,6 +607,7 @@ function mostrarResultadoFinal() {
     document.getElementById('enea-result-name').style.color='white';
     document.getElementById('enea-result-sub').textContent=top.desc;
     document.getElementById('enea-result-desc').innerHTML=(r.analisis||'').split('\n\n').map(p=>`<p>${p}</p>`).join('');
+    if(r.area_principal){document.getElementById('enea-area-nombre').textContent=r.area_principal;document.getElementById('enea-area-desc').textContent=r.area_principal_desc||'';}
     document.getElementById('enea-result-areas').innerHTML=(r.areas||[]).map(a=>`<div class="area-chip"><div class="area-dot" style="background:${top.color}"></div><span class="area-name">${a}</span></div>`).join('');
     document.getElementById('enea-result-strengths').innerHTML=(r.fortalezas||[]).map(f=>`<div class="strength-item"><span class="strength-icon">✦</span><span>${f}</span></div>`).join('');
     document.getElementById('enea-result-challenges').innerHTML=(r.desafios||[]).map(d=>`<div class="challenge-item"><span class="challenge-icon">◇</span><span>${d}</span></div>`).join('');
@@ -690,7 +716,7 @@ DIMENSIÓN SECUNDARIA: ${RIASEC_LABELS[secondDim].name} — ${RIASEC_LABELS[seco
 PERFIL TOP 3: ${top3}
 
 Generá un perfil profesional personalizado y profundo basado en estas dimensiones. Respondé SOLO con JSON puro (sin markdown ni backticks):
-{"titulo":"Nombre del perfil vocacional que combine las dimensiones principales","subtitulo":"Frase que capture la esencia laboral en una línea","descripcion":"3 párrafos en segunda persona separados por \\n\\n","areas":["6 a 8 áreas vocacionales concretas"],"fortalezas":["5 fortalezas laborales en segunda persona"],"desafios":["4 desafíos de crecimiento con empatía"]}`;
+{"titulo":"Nombre del perfil vocacional","subtitulo":"Frase que capture la esencia laboral","descripcion":"3 párrafos en segunda persona separados por \\n\\n","area_principal":"Nombre del área vocacional que mejor encaja con este perfil (1 sola, específica)","area_principal_desc":"2-3 oraciones explicando por qué esta área encaja con el perfil de la persona, en segunda persona","areas":["5 a 6 áreas vocacionales adicionales concretas, sin repetir el área principal"],"fortalezas":["5 fortalezas laborales en segunda persona"],"desafios":["4 desafíos de crecimiento con empatía"]}`;
   try{
     const res=await fetch("/.netlify/functions/analyze",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({prompt,max_tokens:1000})});
     const data=await res.json();
@@ -702,16 +728,24 @@ Generá un perfil profesional personalizado y profundo basado en estas dimension
 }
 
 const SCALE_LABELS=["Nada que ver conmigo","Poco","A veces","Bastante","Muy yo"];
+// Bloques visuales para mostrar progreso más amigable
+const ENEA_BLOQUES = [
+  {num:1, nombre:"¿Cómo sos con el mundo?", secciones:[0,1,2]},
+  {num:2, nombre:"¿Cómo sos con vos mismo/a?", secciones:[3,4,5]},
+  {num:3, nombre:"¿Cómo sos con los demás?", secciones:[6,7,8]},
+];
+
+// 40 preguntas: tipos 1,3,5,7,9 tienen 4 preguntas; tipos 2,4,6,8 tienen 5 preguntas
 const ENEA_SECTIONS=[
-  {tipo:"Perfeccionista",questions:["Me molesta cuando las cosas están mal hechas.","Siento que debería hacer lo correcto aunque nadie me mire.","Me cuesta relajarme cuando algo no salió perfecto.","Me gusta organizar y mejorar lo que no funciona.","Soy exigente conmigo mismo/a."]},
+  {tipo:"Perfeccionista",questions:["Me molesta cuando las cosas están mal hechas.","Me cuesta relajarme cuando algo no salió perfecto.","Me gusta organizar y mejorar lo que no funciona.","Soy exigente conmigo mismo/a."]},
   {tipo:"Ayudador",questions:["Me siento bien cuando puedo ayudar a alguien.","A veces priorizo a otros antes que a mí.","Me gusta que me necesiten.","Me cuesta decir que no.","Soy bueno/a escuchando problemas."]},
-  {tipo:"Triunfador",questions:["Me motiva destacarme.","Quiero que reconozcan mi esfuerzo.","Me adapto rápido para alcanzar objetivos.","Me gusta sentir que soy exitoso/a.","Me esfuerzo por mostrar mi mejor versión."]},
+  {tipo:"Triunfador",questions:["Me motiva destacarme.","Me adapto rápido para alcanzar objetivos.","Me gusta sentir que soy exitoso/a.","Me esfuerzo por mostrar mi mejor versión."]},
   {tipo:"Individualista",questions:["Me siento diferente al resto.","Expreso mucho lo que siento.","Me atraen actividades artísticas.","Busco que mi trabajo tenga significado.","Me afecta mucho lo que vivo emocionalmente."]},
-  {tipo:"Observador",questions:["Prefiero observar antes que hablar.","Me interesa entender cómo funcionan las cosas.","Disfruto investigar temas a fondo.","Necesito tiempo a solas.","Me gusta aprender cosas complejas."]},
+  {tipo:"Observador",questions:["Prefiero observar antes que hablar.","Me interesa entender cómo funcionan las cosas.","Disfruto investigar temas a fondo.","Necesito tiempo a solas."]},
   {tipo:"Leal",questions:["Pienso en posibles problemas antes de actuar.","Busco seguridad antes de decidir.","Me preocupa equivocarme.","Valoro mucho el trabajo en equipo.","Necesito confiar en quien me guía."]},
-  {tipo:"Entusiasta",questions:["Me aburro fácilmente si algo es repetitivo.","Tengo muchas ideas nuevas.","Me gusta probar cosas distintas.","Busco experiencias divertidas.","Me cuesta quedarme en una sola opción."]},
+  {tipo:"Entusiasta",questions:["Me aburro fácilmente si algo es repetitivo.","Tengo muchas ideas nuevas.","Me gusta probar cosas distintas.","Me cuesta quedarme en una sola opción."]},
   {tipo:"Desafiador",questions:["No me gusta que me digan qué hacer.","Defiendo mis ideas con fuerza.","Me gusta tomar decisiones.","Protejo a quienes quiero.","Prefiero actuar antes que esperar."]},
-  {tipo:"Pacificador",questions:["Evito conflictos.","Me adapto para que haya paz.","Escucho diferentes puntos de vista.","Me cuesta priorizar mis deseos.","Soy paciente."]},
+  {tipo:"Pacificador",questions:["Evito conflictos.","Me adapto para que haya paz.","Escucho diferentes puntos de vista.","Soy paciente."]},
 ];
 const PROFILES=[
   {name:"Perfeccionista",emoji:"✅",color:"#1e3a8a",desc:"Sos detallista, organizado/a y tenés altos estándares de calidad.",careers:"Auditoría, Derecho, Ingeniería, Medicina, Arquitectura, Control de Calidad."},
@@ -725,33 +759,60 @@ const PROFILES=[
   {name:"Pacificador",emoji:"☮️",color:"#065f46",desc:"Sos tranquilo/a, empático/a y buen mediador/a.",careers:"Mediación, Diplomacia, Trabajo Social, Psicología, Relaciones Internacionales, Educación."},
 ];
 
-let eneaSection=0,eneaAnswers=Array(45).fill(null);
-function startEneagrama(){eneaAnswers=Array(45).fill(null);eneaSection=0;buildEneaSec();goTo('screen-enea-quiz');}
+let eneaSection=0,eneaAnswers=Array(40).fill(null);
+function startEneagrama(){eneaAnswers=Array(40).fill(null);eneaSection=0;buildEneaSec();goTo('screen-enea-quiz');}
+// Calcular offset de respuestas para cada sección (preguntas variables)
+function getOffset(sec){return ENEA_SECTIONS.slice(0,sec).reduce((s,x)=>s+x.questions.length,0);}
+function getBloque(sec){return ENEA_BLOQUES.find(b=>b.secciones.includes(sec));}
+
 function buildEneaSec(){
   const body=document.getElementById('enea-body');
   const sec=ENEA_SECTIONS[eneaSection];
+  const offset=getOffset(eneaSection);
+  const totalPreguntas=ENEA_SECTIONS.reduce((s,x)=>s+x.questions.length,0);
   const answered=eneaAnswers.filter(a=>a!==null).length;
-  const pct=Math.round((answered/45)*100);
+  const pct=Math.round((answered/totalPreguntas)*100);
+  const bloque=getBloque(eneaSection);
+  const secEnBloque=bloque.secciones.indexOf(eneaSection)+1;
   document.getElementById('enea-progress-fill').style.width=pct+'%';
   document.getElementById('enea-prog-pct').textContent=pct+'%';
-  document.getElementById('enea-counter').textContent=`Sección ${eneaSection+1} / 9`;
+  document.getElementById('enea-counter').textContent=`Bloque ${bloque.num} de 3`;
   document.getElementById('enea-back').style.visibility=eneaSection===0?'hidden':'visible';
   updateEneaBtn();
-  body.innerHTML=`<div class="enea-section-info">Tipo ${eneaSection+1} de 9 — ${sec.tipo}</div>`;
+  body.innerHTML=`<div class="enea-section-info">Bloque ${bloque.num} de 3 — ${bloque.nombre} · Parte ${secEnBloque}/3</div>`;
   sec.questions.forEach((q,i)=>{
-    const gi=eneaSection*5+i;const val=eneaAnswers[gi];
+    const gi=offset+i;const val=eneaAnswers[gi];
     const item=document.createElement('div');item.className='enea-question-item';
     item.innerHTML=`<div class="enea-question-text"><span class="enea-question-num">${gi+1}.</span>${q}</div><div class="enea-scale">${SCALE_LABELS.map((l,s)=>`<button class="enea-scale-btn${val===s+1?' selected':''}" onclick="selectEnea(${i},${s+1})" id="es-${i}-${s}"><span class="enea-scale-num">${s+1}</span>${l}</button>`).join('')}</div>`;
     body.appendChild(item);
   });
 }
-function selectEnea(qi,val){eneaAnswers[eneaSection*5+qi]=val;document.querySelectorAll(`[id^="es-${qi}-"]`).forEach(b=>b.classList.remove('selected'));document.getElementById(`es-${qi}-${val-1}`).classList.add('selected');updateEneaBtn();}
-function updateEneaBtn(){const ok=eneaAnswers.slice(eneaSection*5,eneaSection*5+5).every(a=>a!==null);const btn=document.getElementById('btn-next-enea');btn.classList.toggle('enabled',ok);btn.textContent=eneaSection===8?'Ver mi perfil →':'Siguiente →';}
-function nextEnea(){if(!eneaAnswers.slice(eneaSection*5,eneaSection*5+5).every(a=>a!==null))return;if(eneaSection===8)submitEneagrama();else{eneaSection++;buildEneaSec();window.scrollTo(0,0);}}
+function selectEnea(qi,val){
+  const offset=getOffset(eneaSection);
+  eneaAnswers[offset+qi]=val;
+  document.querySelectorAll(`[id^="es-${qi}-"]`).forEach(b=>b.classList.remove('selected'));
+  document.getElementById(`es-${qi}-${val-1}`).classList.add('selected');
+  updateEneaBtn();
+}
+function updateEneaBtn(){
+  const offset=getOffset(eneaSection);
+  const len=ENEA_SECTIONS[eneaSection].questions.length;
+  const ok=eneaAnswers.slice(offset,offset+len).every(a=>a!==null);
+  const btn=document.getElementById('btn-next-enea');
+  btn.classList.toggle('enabled',ok);
+  btn.textContent=eneaSection===8?'Ver mi perfil →':'Siguiente →';
+}
+function nextEnea(){
+  const offset=getOffset(eneaSection);
+  const len=ENEA_SECTIONS[eneaSection].questions.length;
+  if(!eneaAnswers.slice(offset,offset+len).every(a=>a!==null))return;
+  if(eneaSection===8)submitEneagrama();
+  else{eneaSection++;buildEneaSec();window.scrollTo(0,0);}
+}
 function prevEnea(){if(eneaSection>0){eneaSection--;buildEneaSec();window.scrollTo(0,0);}}
 
 async function submitEneagrama(){
-  const scores=PROFILES.map((_,pi)=>eneaAnswers.slice(pi*5,pi*5+5).reduce((s,v)=>s+(v||0),0));
+  const scores=PROFILES.map((_,pi)=>{const off=getOffset(pi);const len=ENEA_SECTIONS[pi].questions.length;return eneaAnswers.slice(off,off+len).reduce((s,v)=>s+(v||0),0);});
   const topIdx=scores.indexOf(Math.max(...scores));
   const sorted=scores.map((s,i)=>({i,s})).sort((a,b)=>b.s-a.s);
   const top=PROFILES[topIdx];
@@ -759,8 +820,8 @@ async function submitEneagrama(){
   document.getElementById('loader-ring').className='loader-ring enea-ring';
   document.getElementById('loader-text').textContent='Procesando tu perfil de eneagrama...';
   goTo('screen-loading');
-  const scoresSummary=sorted.map(({i,s})=>`${PROFILES[i].name}: ${s}/25`).join(', ');
-  const prompt=`Sos un experto en eneagrama y orientación vocacional. Una persona completó un test de eneagrama.\n\nDATOS: Nombre: ${userData.nombre}, Edad: ${userData.edad} años, Localidad: ${userData.localidad}\nPUNTAJES (máx 25 por tipo): ${scoresSummary}\nTIPO PRINCIPAL: ${top.name} (${scores[topIdx]}/25)\nTIPO SECUNDARIO: ${PROFILES[secondIdx].name} (${sorted[1].s}/25)\nDESCRIPCIÓN BASE: ${top.desc}\nORIENTACIÓN BASE: ${top.careers}\n\nGenerá un análisis profundo y personalizado. Respondé SOLO con JSON puro (sin markdown ni backticks):\n{"analisis":"3 párrafos sobre la personalidad en segunda persona, incorporando el tipo secundario si es relevante. Separados por \\n\\n","areas":["6 a 8 áreas vocacionales muy específicas y concretas"],"fortalezas":["5 fortalezas específicas del tipo en segunda persona"],"desafios":["4 desafíos de crecimiento formulados con empatía"]}`;
+  const maxPorTipo=ENEA_SECTIONS.map(s=>s.questions.length*5);const scoresSummary=sorted.map(({i,s})=>`${PROFILES[i].name}: ${s}/${maxPorTipo[i]}`).join(', ');
+  const prompt=`Sos un experto en eneagrama y orientación vocacional. Una persona completó un test de eneagrama.\n\nDATOS: Nombre: ${userData.nombre}, Edad: ${userData.edad} años, Localidad: ${userData.localidad}\nPUNTAJES (máx 25 por tipo): ${scoresSummary}\nTIPO PRINCIPAL: ${top.name} (${scores[topIdx]}/25)\nTIPO SECUNDARIO: ${PROFILES[secondIdx].name} (${sorted[1].s}/25)\nDESCRIPCIÓN BASE: ${top.desc}\nORIENTACIÓN BASE: ${top.careers}\n\nGenerá un análisis profundo y personalizado. Respondé SOLO con JSON puro (sin markdown ni backticks):\n{"analisis":"3 párrafos sobre la personalidad en segunda persona, incorporando el tipo secundario. Separados por \\n\\n","area_principal":"Nombre del área vocacional que mejor encaja con este tipo de eneagrama (1 sola, específica)","area_principal_desc":"2-3 oraciones explicando por qué esta área encaja con la personalidad de esta persona, en segunda persona","areas":["5 a 6 áreas vocacionales adicionales, sin repetir el área principal"],"fortalezas":["5 fortalezas específicas del tipo en segunda persona"],"desafios":["4 desafíos de crecimiento formulados con empatía"]}`;
   try{
     const res=await fetch("/.netlify/functions/analyze",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({prompt,max_tokens:1200})});
     const data=await res.json();
@@ -780,7 +841,13 @@ function descargarPDF(tipo){
     const areas=Array.from(document.querySelectorAll('#result-areas .area-name')).map(a=>a.textContent);
     const fortalezas=Array.from(document.querySelectorAll('#result-strengths .strength-item span:last-child')).map(a=>a.textContent);
     const desafios=Array.from(document.querySelectorAll('#result-challenges .challenge-item span:last-child')).map(a=>a.textContent);
-    pdf.innerHTML=`<div class="pdf-header"><div class="pdf-logo">Espacio BrOD · Perfil Vocacional</div><div class="pdf-title">${titulo}</div><div class="pdf-sub">${subtitulo}</div><div class="pdf-datos">${u.nombre} · ${u.edad} años · ${u.localidad}</div></div><div class="pdf-section"><div class="pdf-section-label">— Descripción general</div><div class="pdf-text">${desc}</div></div><div class="pdf-section"><div class="pdf-section-label">— Áreas vocacionales afines</div><div class="pdf-chips">${areas.map(a=>`<div class="pdf-chip">${a}</div>`).join('')}</div></div><div class="pdf-section"><div class="pdf-section-label">— Fortalezas laborales</div>${fortalezas.map(f=>`<div class="pdf-list-item">✦ ${f}</div>`).join('')}</div><div class="pdf-section"><div class="pdf-section-label">— Desafíos a trabajar</div>${desafios.map(d=>`<div class="pdf-list-item">◇ ${d}</div>`).join('')}</div><div class="pdf-footer">Espacio BrOD - Brechas y Oportunidades Digitales · ${new Date().toLocaleDateString("es-AR")} | BROD – De la brecha digital a nuevas oportunidades laborales</div>`;
+    pdf.innerHTML=`<div class="pdf-header"><div class="pdf-logo">Espacio BrOD · Perfil Vocacional</div><div class="pdf-title">${titulo}</div><div class="pdf-sub">${subtitulo}</div><div class="pdf-datos">${u.nombre} · ${u.edad} años · ${u.localidad}</div></div><div class="pdf-section"><div class="pdf-section-label">— Descripción general</div><div class="pdf-text">${desc}</div></div><div class="pdf-section"><div class="pdf-section-label">— Áreas vocacionales afines</div><div class="pdf-chips">${areas.map(a=>`<div class="pdf-chip">${a}</div>`).join('')}</div></div><div class="pdf-section"><div class="pdf-section-label">— Fortalezas laborales</div>${fortalezas.map(f=>`<div class="pdf-list-item">✦ ${f}</div>`).join('')}</div><div class="pdf-section"><div class="pdf-section-label">— Desafíos a trabajar</div>${desafios.map(d=>`<div class="pdf-list-item">◇ ${d}</div>`).join('')}</div><div class="pdf-footer">Espacio BrOD – De la brecha digital a nuevas oportunidades laborales · ${new Date().toLocaleDateString("es-AR")}
+      </div>
+      <div style="margin-top:12px;padding-top:12px;border-top:1px solid #ddd;font-size:11px;color:#555;line-height:1.7;">
+        Para una mejor interpretación de los resultados de este informe, podés comunicarte con nuestro servicio de orientación laboral y profesional:<br>
+        📧 brod.brechas@gmail.com &nbsp;|&nbsp; 📷 Instagram: @brod.consultora
+      </div>
+      <div style="margin-top:8px;font-size:10px;color:#aaa;</div>`;
   }else{
     const nombre=document.getElementById('enea-result-name').textContent;
     const sub=document.getElementById('enea-result-sub').textContent;
@@ -789,12 +856,18 @@ function descargarPDF(tipo){
     const fortalezas=Array.from(document.querySelectorAll('#enea-result-strengths .strength-item span:last-child')).map(a=>a.textContent);
     const desafios=Array.from(document.querySelectorAll('#enea-result-challenges .challenge-item span:last-child')).map(a=>a.textContent);
     const scores=Array.from(document.querySelectorAll('#enea-scores .score-row')).map(r=>({label:r.querySelector('.score-label').textContent,val:r.querySelector('.score-val').textContent,width:r.querySelector('.score-bar-fill').style.width,color:r.querySelector('.score-bar-fill').style.background}));
-    pdf.innerHTML=`<div class="pdf-header"><div class="pdf-logo">Espacio BrOD · Eneagrama</div><div class="pdf-title">${nombre}</div><div class="pdf-sub">${sub}</div><div class="pdf-datos">${u.nombre} · ${u.edad} años · ${u.localidad}</div></div><div class="pdf-section"><div class="pdf-section-label">— Análisis de tu personalidad</div><div class="pdf-text">${desc}</div></div><div class="pdf-section"><div class="pdf-section-label">— Orientación vocacional</div><div class="pdf-chips">${areas.map(a=>`<div class="pdf-chip">${a}</div>`).join('')}</div></div><div class="pdf-section"><div class="pdf-section-label">— Fortalezas</div>${fortalezas.map(f=>`<div class="pdf-list-item">✦ ${f}</div>`).join('')}</div><div class="pdf-section"><div class="pdf-section-label">— Áreas de crecimiento</div>${desafios.map(d=>`<div class="pdf-list-item">◇ ${d}</div>`).join('')}</div><div class="pdf-section"><div class="pdf-section-label">— Puntajes por tipo</div>${scores.map(s=>`<div class="pdf-score-row"><div class="pdf-score-label">${s.label}</div><div class="pdf-score-bar-wrap"><div class="pdf-score-bar" style="width:${s.width};background:${s.color}"></div></div><div class="pdf-score-val">${s.val}</div></div>`).join('')}</div><div class="pdf-footer">Espacio BrOD - Brechas y Oportunidades Digitales · ${new Date().toLocaleDateString("es-AR")} | BROD – De la brecha digital a nuevas oportunidades laborales</div>`;
+    pdf.innerHTML=`<div class="pdf-header"><div class="pdf-logo">Espacio BrOD · Eneagrama</div><div class="pdf-title">${nombre}</div><div class="pdf-sub">${sub}</div><div class="pdf-datos">${u.nombre} · ${u.edad} años · ${u.localidad}</div></div><div class="pdf-section"><div class="pdf-section-label">— Análisis de tu personalidad</div><div class="pdf-text">${desc}</div></div><div class="pdf-section"><div class="pdf-section-label">— Orientación vocacional</div><div class="pdf-chips">${areas.map(a=>`<div class="pdf-chip">${a}</div>`).join('')}</div></div><div class="pdf-section"><div class="pdf-section-label">— Fortalezas</div>${fortalezas.map(f=>`<div class="pdf-list-item">✦ ${f}</div>`).join('')}</div><div class="pdf-section"><div class="pdf-section-label">— Áreas de crecimiento</div>${desafios.map(d=>`<div class="pdf-list-item">◇ ${d}</div>`).join('')}</div><div class="pdf-section"><div class="pdf-section-label">— Puntajes por tipo</div>${scores.map(s=>`<div class="pdf-score-row"><div class="pdf-score-label">${s.label}</div><div class="pdf-score-bar-wrap"><div class="pdf-score-bar" style="width:${s.width};background:${s.color}"></div></div><div class="pdf-score-val">${s.val}</div></div>`).join('')}</div><div class="pdf-footer">Espacio BrOD – De la brecha digital a nuevas oportunidades laborales · ${new Date().toLocaleDateString("es-AR")}
+      </div>
+      <div style="margin-top:12px;padding-top:12px;border-top:1px solid #ddd;font-size:11px;color:#555;line-height:1.7;">
+        Para una mejor interpretación de los resultados de este informe, podés comunicarte con nuestro servicio de orientación laboral y profesional:<br>
+        📧 brod.brechas@gmail.com &nbsp;|&nbsp; 📷 Instagram: @brod.consultora
+      </div>
+      <div style="margin-top:8px;font-size:10px;color:#aaa;</div>`;
   }
   window.print();
 }
 
-function restart(){vAnswers=new Array(VQUESTIONS.length).fill(null);eneaAnswers=Array(45).fill(null);userData={};['f-nombre','f-localidad','f-email','f-edad'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});goTo('screen-intro');}
+function restart(){vAnswers=new Array(VQUESTIONS.length).fill(null);eneaAnswers=Array(45).fill(null);userData={};['f-nombre','f-localidad','f-email','f-edad'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});eneaAnswers=Array(40).fill(null);goTo('screen-intro');}
 </script>
 </body>
 </html>
