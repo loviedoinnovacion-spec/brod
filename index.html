@@ -422,26 +422,26 @@ body::after { content: ''; position: fixed; inset: 0; background-image: url("dat
     <div class="step-eyebrow anim-fadeup">— Perfil Vocacional · Tu momento actual</div>
     <h2 class="section-title anim-fadeup-2">¿En qué momento<br>estás hoy?</h2>
     <p class="section-sub anim-fadeup-3">Elegí la opción que mejor describe tu situación. Esto nos ayuda a personalizar mejor tu resultado.</p>
-    <div class="context-grid anim-fadeup-3">
-      <div class="context-card" onclick="seleccionarContexto('voc', 'definiendo', this)">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:28px;" class="anim-fadeup-3">
+      <div onclick="seleccionarContexto('voc', 'definiendo', this)" id="ctx-voc-definiendo" style="background:white;border:2px solid #e5e7eb;padding:20px;cursor:pointer;transition:all 0.2s;border-radius:0;">
         <span class="context-card-icon">🌱</span>
-        <div class="context-card-title">Definiendo mi camino</div>
-        <div class="context-card-desc">Estoy en una etapa de exploración y busco saber qué dirección tomar por primera vez.</div>
+        <div style="font-family:'Playfair Display',serif;font-size:15px;font-weight:700;color:#1a1a2e;margin-bottom:4px;">Definiendo mi camino</div>
+        <div style="font-size:12px;color:#6b7280;font-weight:300;line-height:1.5;">Estoy en una etapa de exploración y busco saber qué dirección tomar por primera vez.</div>
       </div>
-      <div class="context-card" onclick="seleccionarContexto('voc', 'cambio', this)">
+      <div onclick="seleccionarContexto('voc', 'cambio', this)" id="ctx-voc-cambio" style="background:white;border:2px solid #e5e7eb;padding:20px;cursor:pointer;transition:all 0.2s;">
         <span class="context-card-icon">🔄</span>
-        <div class="context-card-title">Quiero cambiar de trabajo</div>
-        <div class="context-card-desc">Ya tengo experiencia laboral pero siento que es momento de explorar algo diferente.</div>
+        <div style="font-family:'Playfair Display',serif;font-size:15px;font-weight:700;color:#1a1a2e;margin-bottom:4px;">Quiero cambiar de trabajo</div>
+        <div style="font-size:12px;color:#6b7280;font-weight:300;line-height:1.5;">Ya tengo experiencia laboral pero siento que es momento de explorar algo diferente.</div>
       </div>
-      <div class="context-card" onclick="seleccionarContexto('voc', 'horizontes', this)">
+      <div onclick="seleccionarContexto('voc', 'horizontes', this)" id="ctx-voc-horizontes" style="background:white;border:2px solid #e5e7eb;padding:20px;cursor:pointer;transition:all 0.2s;">
         <span class="context-card-icon">🚀</span>
-        <div class="context-card-title">Busco nuevos horizontes</div>
-        <div class="context-card-desc">Quiero sumar nuevas oportunidades, un emprendimiento o actividades sin dejar lo que tengo.</div>
+        <div style="font-family:'Playfair Display',serif;font-size:15px;font-weight:700;color:#1a1a2e;margin-bottom:4px;">Busco nuevos horizontes</div>
+        <div style="font-size:12px;color:#6b7280;font-weight:300;line-height:1.5;">Quiero sumar nuevas oportunidades, un emprendimiento o actividades sin dejar lo que tengo.</div>
       </div>
-      <div class="context-card" onclick="seleccionarContexto('voc', 'regreso', this)">
+      <div onclick="seleccionarContexto('voc', 'regreso', this)" id="ctx-voc-regreso" style="background:white;border:2px solid #e5e7eb;padding:20px;cursor:pointer;transition:all 0.2s;">
         <span class="context-card-icon">🔁</span>
-        <div class="context-card-title">Volviendo al mercado</div>
-        <div class="context-card-desc">Estuve un tiempo fuera del mercado laboral y quiero reinsertarme o reorientarme.</div>
+        <div style="font-family:'Playfair Display',serif;font-size:15px;font-weight:700;color:#1a1a2e;margin-bottom:4px;">Volviendo al mercado</div>
+        <div style="font-size:12px;color:#6b7280;font-weight:300;line-height:1.5;">Estuve un tiempo fuera del mercado laboral y quiero reinsertarme o reorientarme.</div>
       </div>
     </div>
     <div id="contexto-voc-error" style="display:none;font-size:12px;color:var(--danger);background:#fef2f2;padding:10px 14px;border-left:3px solid var(--danger);margin-bottom:16px;">Por favor elegí una opción antes de continuar.</div>
@@ -458,26 +458,26 @@ body::after { content: ''; position: fixed; inset: 0; background-image: url("dat
     <div class="step-eyebrow anim-fadeup" style="color:var(--enea);">— Eneagrama · Tu momento actual</div>
     <h2 class="section-title anim-fadeup-2">¿En qué momento<br>estás hoy?</h2>
     <p class="section-sub anim-fadeup-3">Elegí la opción que mejor describe tu situación. Esto nos ayuda a personalizar mejor tu resultado.</p>
-    <div class="context-grid anim-fadeup-3">
-      <div class="context-card enea-ctx" onclick="seleccionarContexto('enea', 'definiendo', this)">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:28px;" class="anim-fadeup-3">
+      <div onclick="seleccionarContexto('enea', 'definiendo', this)" id="ctx-enea-definiendo" style="background:white;border:2px solid #e5e7eb;padding:20px;cursor:pointer;transition:all 0.2s;">
         <span class="context-card-icon">🌱</span>
-        <div class="context-card-title">Definiendo mi camino</div>
-        <div class="context-card-desc">Estoy en una etapa de exploración y busco saber qué dirección tomar por primera vez.</div>
+        <div style="font-family:'Playfair Display',serif;font-size:15px;font-weight:700;color:#1a1a2e;margin-bottom:4px;">Definiendo mi camino</div>
+        <div style="font-size:12px;color:#6b7280;font-weight:300;line-height:1.5;">Estoy en una etapa de exploración y busco saber qué dirección tomar por primera vez.</div>
       </div>
-      <div class="context-card enea-ctx" onclick="seleccionarContexto('enea', 'cambio', this)">
+      <div onclick="seleccionarContexto('enea', 'cambio', this)" id="ctx-enea-cambio" style="background:white;border:2px solid #e5e7eb;padding:20px;cursor:pointer;transition:all 0.2s;">
         <span class="context-card-icon">🔄</span>
-        <div class="context-card-title">Quiero cambiar de trabajo</div>
-        <div class="context-card-desc">Ya tengo experiencia laboral pero siento que es momento de explorar algo diferente.</div>
+        <div style="font-family:'Playfair Display',serif;font-size:15px;font-weight:700;color:#1a1a2e;margin-bottom:4px;">Quiero cambiar de trabajo</div>
+        <div style="font-size:12px;color:#6b7280;font-weight:300;line-height:1.5;">Ya tengo experiencia laboral pero siento que es momento de explorar algo diferente.</div>
       </div>
-      <div class="context-card enea-ctx" onclick="seleccionarContexto('enea', 'horizontes', this)">
+      <div onclick="seleccionarContexto('enea', 'horizontes', this)" id="ctx-enea-horizontes" style="background:white;border:2px solid #e5e7eb;padding:20px;cursor:pointer;transition:all 0.2s;">
         <span class="context-card-icon">🚀</span>
-        <div class="context-card-title">Busco nuevos horizontes</div>
-        <div class="context-card-desc">Quiero sumar nuevas oportunidades, un emprendimiento o actividades sin dejar lo que tengo.</div>
+        <div style="font-family:'Playfair Display',serif;font-size:15px;font-weight:700;color:#1a1a2e;margin-bottom:4px;">Busco nuevos horizontes</div>
+        <div style="font-size:12px;color:#6b7280;font-weight:300;line-height:1.5;">Quiero sumar nuevas oportunidades, un emprendimiento o actividades sin dejar lo que tengo.</div>
       </div>
-      <div class="context-card enea-ctx" onclick="seleccionarContexto('enea', 'regreso', this)">
+      <div onclick="seleccionarContexto('enea', 'regreso', this)" id="ctx-enea-regreso" style="background:white;border:2px solid #e5e7eb;padding:20px;cursor:pointer;transition:all 0.2s;">
         <span class="context-card-icon">🔁</span>
-        <div class="context-card-title">Volviendo al mercado</div>
-        <div class="context-card-desc">Estuve un tiempo fuera del mercado laboral y quiero reinsertarme o reorientarme.</div>
+        <div style="font-family:'Playfair Display',serif;font-size:15px;font-weight:700;color:#1a1a2e;margin-bottom:4px;">Volviendo al mercado</div>
+        <div style="font-size:12px;color:#6b7280;font-weight:300;line-height:1.5;">Estuve un tiempo fuera del mercado laboral y quiero reinsertarme o reorientarme.</div>
       </div>
     </div>
     <div id="contexto-enea-error" style="display:none;font-size:12px;color:var(--danger);background:#fef2f2;padding:10px 14px;border-left:3px solid var(--danger);margin-bottom:16px;">Por favor elegí una opción antes de continuar.</div>
@@ -746,9 +746,14 @@ const CONTEXTO_LABELS = {
 };
 
 function seleccionarContexto(tipo, valor, el) {
-  const prefix = tipo === 'voc' ? '' : '.enea-ctx';
-  document.querySelectorAll(`.context-card${prefix}`).forEach(c => c.classList.remove('selected-ctx'));
-  el.classList.add('selected-ctx');
+  const color = tipo === 'voc' ? '#1e3a8a' : '#6d28d9';
+  const bgColor = tipo === 'voc' ? '#dbeafe' : '#ede9fe';
+  ['definiendo','cambio','horizontes','regreso'].forEach(v => {
+    const card = document.getElementById(`ctx-${tipo}-${v}`);
+    if(card) { card.style.border = '2px solid #e5e7eb'; card.style.background = 'white'; }
+  });
+  el.style.border = `2px solid ${color}`;
+  el.style.background = bgColor;
   if(tipo === 'voc') contextoVoc = valor;
   else contextoEnea = valor;
   document.getElementById(`contexto-${tipo}-error`).style.display = 'none';
