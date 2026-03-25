@@ -384,7 +384,7 @@ body::after { content: ''; position: fixed; inset: 0; background-image: url("dat
     </div>
     <div style="display:flex;gap:12px;flex-wrap:wrap;" class="anim-fadeup-4">
       <button class="btn-secondary" onclick="goTo('screen-eleccion')">← Volver</button>
-      <button class="btn-primary" onclick="iniciarVocacional()">Comenzar test →</button>
+      <button class="btn-primary" onclick="goTo('screen-contexto-voc')">Continuar →</button>
     </div>
   </div>
 </div>
@@ -411,7 +411,79 @@ body::after { content: ''; position: fixed; inset: 0; background-image: url("dat
     </div>
     <div style="display:flex;gap:12px;flex-wrap:wrap;" class="anim-fadeup-4">
       <button class="btn-secondary" onclick="goTo('screen-eleccion')">← Volver</button>
-      <button class="btn-primary" style="background:var(--enea);" onclick="iniciarEneagrama()">Comenzar test →</button>
+      <button class="btn-primary" style="background:var(--enea);" onclick="goTo('screen-contexto-enea')">Continuar →</button>
+    </div>
+  </div>
+</div>
+
+<!-- CONTEXTO VOCACIONAL -->
+<div id="screen-contexto-voc" class="screen">
+  <div class="datos-wrap" style="max-width:580px;">
+    <div class="step-eyebrow anim-fadeup">— Perfil Vocacional · Tu momento actual</div>
+    <h2 class="section-title anim-fadeup-2">¿En qué momento<br>estás hoy?</h2>
+    <p class="section-sub anim-fadeup-3">Elegí la opción que mejor describe tu situación. Esto nos ayuda a personalizar mejor tu resultado.</p>
+    <div class="context-grid anim-fadeup-3">
+      <div class="context-card" onclick="seleccionarContexto('voc', 'definiendo', this)">
+        <span class="context-card-icon">🌱</span>
+        <div class="context-card-title">Definiendo mi camino</div>
+        <div class="context-card-desc">Estoy en una etapa de exploración y busco saber qué dirección tomar por primera vez.</div>
+      </div>
+      <div class="context-card" onclick="seleccionarContexto('voc', 'cambio', this)">
+        <span class="context-card-icon">🔄</span>
+        <div class="context-card-title">Quiero cambiar de trabajo</div>
+        <div class="context-card-desc">Ya tengo experiencia laboral pero siento que es momento de explorar algo diferente.</div>
+      </div>
+      <div class="context-card" onclick="seleccionarContexto('voc', 'horizontes', this)">
+        <span class="context-card-icon">🚀</span>
+        <div class="context-card-title">Busco nuevos horizontes</div>
+        <div class="context-card-desc">Quiero sumar nuevas oportunidades, un emprendimiento o actividades sin dejar lo que tengo.</div>
+      </div>
+      <div class="context-card" onclick="seleccionarContexto('voc', 'regreso', this)">
+        <span class="context-card-icon">🔁</span>
+        <div class="context-card-title">Volviendo al mercado</div>
+        <div class="context-card-desc">Estuve un tiempo fuera del mercado laboral y quiero reinsertarme o reorientarme.</div>
+      </div>
+    </div>
+    <div id="contexto-voc-error" style="display:none;font-size:12px;color:var(--danger);background:#fef2f2;padding:10px 14px;border-left:3px solid var(--danger);margin-bottom:16px;">Por favor elegí una opción antes de continuar.</div>
+    <div style="display:flex;gap:12px;flex-wrap:wrap;">
+      <button class="btn-secondary" onclick="goTo('screen-intro-voc')">← Volver</button>
+      <button class="btn-primary" onclick="confirmarContexto('voc')">Comenzar test →</button>
+    </div>
+  </div>
+</div>
+
+<!-- CONTEXTO ENEAGRAMA -->
+<div id="screen-contexto-enea" class="screen">
+  <div class="datos-wrap" style="max-width:580px;">
+    <div class="step-eyebrow anim-fadeup" style="color:var(--enea);">— Eneagrama · Tu momento actual</div>
+    <h2 class="section-title anim-fadeup-2">¿En qué momento<br>estás hoy?</h2>
+    <p class="section-sub anim-fadeup-3">Elegí la opción que mejor describe tu situación. Esto nos ayuda a personalizar mejor tu resultado.</p>
+    <div class="context-grid anim-fadeup-3">
+      <div class="context-card enea-ctx" onclick="seleccionarContexto('enea', 'definiendo', this)">
+        <span class="context-card-icon">🌱</span>
+        <div class="context-card-title">Definiendo mi camino</div>
+        <div class="context-card-desc">Estoy en una etapa de exploración y busco saber qué dirección tomar por primera vez.</div>
+      </div>
+      <div class="context-card enea-ctx" onclick="seleccionarContexto('enea', 'cambio', this)">
+        <span class="context-card-icon">🔄</span>
+        <div class="context-card-title">Quiero cambiar de trabajo</div>
+        <div class="context-card-desc">Ya tengo experiencia laboral pero siento que es momento de explorar algo diferente.</div>
+      </div>
+      <div class="context-card enea-ctx" onclick="seleccionarContexto('enea', 'horizontes', this)">
+        <span class="context-card-icon">🚀</span>
+        <div class="context-card-title">Busco nuevos horizontes</div>
+        <div class="context-card-desc">Quiero sumar nuevas oportunidades, un emprendimiento o actividades sin dejar lo que tengo.</div>
+      </div>
+      <div class="context-card enea-ctx" onclick="seleccionarContexto('enea', 'regreso', this)">
+        <span class="context-card-icon">🔁</span>
+        <div class="context-card-title">Volviendo al mercado</div>
+        <div class="context-card-desc">Estuve un tiempo fuera del mercado laboral y quiero reinsertarme o reorientarme.</div>
+      </div>
+    </div>
+    <div id="contexto-enea-error" style="display:none;font-size:12px;color:var(--danger);background:#fef2f2;padding:10px 14px;border-left:3px solid var(--danger);margin-bottom:16px;">Por favor elegí una opción antes de continuar.</div>
+    <div style="display:flex;gap:12px;flex-wrap:wrap;">
+      <button class="btn-secondary" onclick="goTo('screen-intro-enea')">← Volver</button>
+      <button class="btn-primary" style="background:var(--enea);" onclick="confirmarContexto('enea')">Comenzar test →</button>
     </div>
   </div>
 </div>
@@ -598,7 +670,7 @@ function mostrarResultadoFinal() {
       const maxR=Math.max(...Object.values(r._riasec));
       riasecEl.innerHTML=sortedR.map(([k,v])=>`<div class="score-row"><div class="score-label">${RIASEC_LABELS[k].name}</div><div class="score-bar-wrap"><div class="score-bar-fill" style="width:${maxR>0?(v/maxR)*100:0}%;background:${v===maxR?'var(--blue)':'#93c5fd'}"></div></div><div class="score-val">${v}/${r._total}</div></div>`).join('');
     }
-    fetch('/.netlify/functions/analyze',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({guardar:{...userData,herramienta:'Perfil Vocacional',perfil:r.titulo||'Sin titulo'}})}).catch(()=>{});
+    fetch('/.netlify/functions/analyze',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({guardar:{...userData,herramienta:'Perfil Vocacional',contexto:CONTEXTO_LABELS[contextoVoc]||'',perfil:r.titulo||'Sin titulo'}})}).catch(()=>{});
   } else {
     const {r,top,sorted,topIdx,scores} = _pendingResult;
     goTo('screen-enea-result');
@@ -611,7 +683,7 @@ function mostrarResultadoFinal() {
     document.getElementById('enea-result-areas').innerHTML=(r.areas||[]).map(a=>`<div class="area-chip"><div class="area-dot" style="background:${top.color}"></div><span class="area-name">${a}</span></div>`).join('');
     document.getElementById('enea-result-strengths').innerHTML=(r.fortalezas||[]).map(f=>`<div class="strength-item"><span class="strength-icon">✦</span><span>${f}</span></div>`).join('');
     document.getElementById('enea-result-challenges').innerHTML=(r.desafios||[]).map(d=>`<div class="challenge-item"><span class="challenge-icon">◇</span><span>${d}</span></div>`).join('');
-    fetch('/.netlify/functions/analyze',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({guardar:{...userData,herramienta:'Eneagrama',perfil:top.name}})}).catch(()=>{});
+    fetch('/.netlify/functions/analyze',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({guardar:{...userData,herramienta:'Eneagrama',contexto:CONTEXTO_LABELS[contextoEnea]||'',perfil:top.name}})}).catch(()=>{});
     document.getElementById('enea-scores').innerHTML=sorted.map(({i,s})=>`<div class="score-row"><div class="score-label">${PROFILES[i].emoji} ${PROFILES[i].name}</div><div class="score-bar-wrap"><div class="score-bar-fill" style="width:${(s/25)*100}%;background:${i===topIdx?PROFILES[i].color:'#e5e7eb'}"></div></div><div class="score-val">${s}/25</div></div>`).join('');
   }
 }
@@ -662,6 +734,33 @@ function calcRIASEC(answers){
 }
 
 const LETTERS=['A','B','C','D'];
+// Contexto vital
+let contextoVoc = null;
+let contextoEnea = null;
+
+const CONTEXTO_LABELS = {
+  definiendo: "Definiendo mi camino por primera vez",
+  cambio: "Buscando cambiar de trabajo o área",
+  horizontes: "Buscando nuevos horizontes sin dejar lo actual",
+  regreso: "Volviendo al mercado laboral"
+};
+
+function seleccionarContexto(tipo, valor, el) {
+  const prefix = tipo === 'voc' ? '' : '.enea-ctx';
+  document.querySelectorAll(`.context-card${prefix}`).forEach(c => c.classList.remove('selected-ctx'));
+  el.classList.add('selected-ctx');
+  if(tipo === 'voc') contextoVoc = valor;
+  else contextoEnea = valor;
+  document.getElementById(`contexto-${tipo}-error`).style.display = 'none';
+}
+
+function confirmarContexto(tipo) {
+  const val = tipo === 'voc' ? contextoVoc : contextoEnea;
+  if(!val) { document.getElementById(`contexto-${tipo}-error`).style.display = 'block'; return; }
+  if(tipo === 'voc') iniciarVocacional();
+  else iniciarEneagrama();
+}
+
 function iniciarVocacional(){startVocacional();}
 function iniciarEneagrama(){startEneagrama();}
 function startVocacional(){vAnswers=new Array(VQUESTIONS.length).fill(null);vCurrent=0;buildVQ();goTo('screen-quiz');showVQ(0);}
@@ -707,6 +806,7 @@ async function submitVocacional(){
   const prompt=`Sos un experto en orientación vocacional basada en el modelo Holland/RIASEC, con profundo conocimiento del mercado laboral argentino. Una persona completó un test vocacional y estos son sus resultados por dimensión.
 
 DATOS: Nombre: ${userData.nombre}, Edad: ${userData.edad} años, Localidad: ${userData.localidad}
+MOMENTO VITAL: ${CONTEXTO_LABELS[contextoVoc]||"No especificado"}
 
 PUNTAJES RIASEC (sobre ${total} respuestas):
 ${scoresSummary}
@@ -715,7 +815,7 @@ DIMENSIÓN PRINCIPAL: ${RIASEC_LABELS[topDim].name} — ${RIASEC_LABELS[topDim].
 DIMENSIÓN SECUNDARIA: ${RIASEC_LABELS[secondDim].name} — ${RIASEC_LABELS[secondDim].desc}
 PERFIL TOP 3: ${top3}
 
-Generá un perfil profesional personalizado basado en estas dimensiones. Las áreas vocacionales y carreras sugeridas deben estar orientadas al mercado laboral argentino: mencioná carreras disponibles en universidades públicas de Argentina (UBA, UNC, UNLP, etc.), sectores en crecimiento en el país, salidas laborales concretas en el contexto argentino, y considerá la situación laboral indicada. Respondé SOLO con JSON puro (sin markdown ni backticks):
+Generá un perfil profesional personalizado basado en estas dimensiones. Las áreas vocacionales y carreras sugeridas deben estar orientadas al mercado laboral argentino: mencioná carreras disponibles en universidades públicas de Argentina (UBA, UNC, UNLP, etc.), sectores en crecimiento en el país, salidas laborales concretas en el contexto argentino. MUY IMPORTANTE: adaptá las sugerencias al momento vital de la persona — si está buscando cambiar de trabajo, enfocate en reconversión y transferencia de habilidades; si busca nuevos horizontes, incluí opciones de emprendimiento o actividades complementarias; si vuelve al mercado, considerá opciones de reinserción y actualización. Respondé SOLO con JSON puro (sin markdown ni backticks):
 {"titulo":"Nombre del perfil vocacional","subtitulo":"Frase que capture la esencia laboral","descripcion":"3 párrafos en segunda persona separados por \\n\\n","area_principal":"Nombre del área vocacional que mejor encaja con este perfil (1 sola, específica)","area_principal_desc":"2-3 oraciones explicando por qué esta área encaja con el perfil de la persona, en segunda persona","areas":["5 a 6 áreas vocacionales adicionales concretas, sin repetir el área principal"],"fortalezas":["5 fortalezas laborales en segunda persona"],"desafios":["4 desafíos de crecimiento con empatía"]}`;
   try{
     const res=await fetch("/.netlify/functions/analyze",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({prompt,max_tokens:1000})});
@@ -821,7 +921,7 @@ async function submitEneagrama(){
   document.getElementById('loader-text').textContent='Procesando tu perfil de eneagrama...';
   goTo('screen-loading');
   const maxPorTipo=ENEA_SECTIONS.map(s=>s.questions.length*5);const scoresSummary=sorted.map(({i,s})=>`${PROFILES[i].name}: ${s}/${maxPorTipo[i]}`).join(', ');
-  const prompt=`Sos un experto en eneagrama y orientación vocacional, con profundo conocimiento del mercado laboral argentino. Una persona completó un test de eneagrama.\n\nDATOS: Nombre: ${userData.nombre}, Edad: ${userData.edad} años, Localidad: ${userData.localidad}\nPUNTAJES (máx 25 por tipo): ${scoresSummary}\nTIPO PRINCIPAL: ${top.name} (${scores[topIdx]}/25)\nTIPO SECUNDARIO: ${PROFILES[secondIdx].name} (${sorted[1].s}/25)\nDESCRIPCIÓN BASE: ${top.desc}\nORIENTACIÓN BASE: ${top.careers}\n\nGenerá un análisis profundo y personalizado. Las áreas vocacionales sugeridas deben estar orientadas al mercado laboral argentino: mencioná carreras disponibles en universidades públicas (UBA, UNC, UNLP, etc.), sectores en crecimiento en Argentina y salidas laborales concretas en el contexto local. Respondé SOLO con JSON puro (sin markdown ni backticks):\n{"analisis":"3 párrafos sobre la personalidad en segunda persona, incorporando el tipo secundario. Separados por \\n\\n","area_principal":"Nombre del área vocacional que mejor encaja con este tipo de eneagrama (1 sola, específica)","area_principal_desc":"2-3 oraciones explicando por qué esta área encaja con la personalidad de esta persona, en segunda persona","areas":["5 a 6 áreas vocacionales adicionales, sin repetir el área principal"],"fortalezas":["5 fortalezas específicas del tipo en segunda persona"],"desafios":["4 desafíos de crecimiento formulados con empatía"]}`;
+  const prompt=`Sos un experto en eneagrama y orientación vocacional, con profundo conocimiento del mercado laboral argentino. Una persona completó un test de eneagrama.\n\nDATOS: Nombre: ${userData.nombre}, Edad: ${userData.edad} años, Localidad: ${userData.localidad}\nPUNTAJES (máx 25 por tipo): ${scoresSummary}\nTIPO PRINCIPAL: ${top.name} (${scores[topIdx]}/25)\nTIPO SECUNDARIO: ${PROFILES[secondIdx].name} (${sorted[1].s}/25)\nDESCRIPCIÓN BASE: ${top.desc}\nORIENTACIÓN BASE: ${top.careers}\n\nGenerá un análisis profundo y personalizado. Las áreas vocacionales sugeridas deben estar orientadas al mercado laboral argentino: mencioná carreras disponibles en universidades públicas (UBA, UNC, UNLP, etc.), sectores en crecimiento en Argentina y salidas laborales concretas en el contexto local. MUY IMPORTANTE: adaptá las sugerencias al momento vital de la persona — si está buscando cambiar de trabajo, enfocate en reconversión; si busca nuevos horizontes, incluí emprendimiento; si vuelve al mercado, considerá reinserción y actualización profesional. Respondé SOLO con JSON puro (sin markdown ni backticks):\n{"analisis":"3 párrafos sobre la personalidad en segunda persona, incorporando el tipo secundario. Separados por \\n\\n","area_principal":"Nombre del área vocacional que mejor encaja con este tipo de eneagrama (1 sola, específica)","area_principal_desc":"2-3 oraciones explicando por qué esta área encaja con la personalidad de esta persona, en segunda persona","areas":["5 a 6 áreas vocacionales adicionales, sin repetir el área principal"],"fortalezas":["5 fortalezas específicas del tipo en segunda persona"],"desafios":["4 desafíos de crecimiento formulados con empatía"]}`;
   try{
     const res=await fetch("/.netlify/functions/analyze",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({prompt,max_tokens:1200})});
     const data=await res.json();
@@ -867,7 +967,7 @@ function descargarPDF(tipo){
   window.print();
 }
 
-function restart(){vAnswers=new Array(VQUESTIONS.length).fill(null);eneaAnswers=Array(45).fill(null);userData={};['f-nombre','f-localidad','f-email','f-edad'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});eneaAnswers=Array(40).fill(null);goTo('screen-intro');}
+function restart(){vAnswers=new Array(VQUESTIONS.length).fill(null);eneaAnswers=Array(45).fill(null);userData={};contextoVoc=null;contextoEnea=null;document.querySelectorAll('.context-card').forEach(c=>c.classList.remove('selected-ctx'));['f-nombre','f-localidad','f-email','f-edad'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});eneaAnswers=Array(40).fill(null);goTo('screen-intro');}
 </script>
 </body>
 </html>
