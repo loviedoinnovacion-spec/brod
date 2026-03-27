@@ -417,8 +417,8 @@ body::after { content: ''; position: fixed; inset: 0; background-image: url("dat
 </div>
 
 <!-- CONTEXTO VOCACIONAL -->
-<div id="screen-contexto-voc" class="screen">
-  <div class="datos-wrap" style="max-width:580px;">
+<div id="screen-contexto-voc" class="screen" style="min-height:100vh;flex-direction:column;align-items:center;justify-content:center;padding:48px 24px;background:var(--bg);">
+  <div style="width:100%;max-width:620px;">
     <div class="step-eyebrow anim-fadeup">— Perfil Vocacional · Tu momento actual</div>
     <h2 class="section-title anim-fadeup-2">¿En qué momento<br>estás hoy?</h2>
     <p class="section-sub anim-fadeup-3">Elegí la opción que mejor describe tu situación. Esto nos ayuda a personalizar mejor tu resultado.</p>
@@ -453,8 +453,8 @@ body::after { content: ''; position: fixed; inset: 0; background-image: url("dat
 </div>
 
 <!-- CONTEXTO ENEAGRAMA -->
-<div id="screen-contexto-enea" class="screen">
-  <div class="datos-wrap" style="max-width:580px;">
+<div id="screen-contexto-enea" class="screen" style="min-height:100vh;flex-direction:column;align-items:center;justify-content:center;padding:48px 24px;background:var(--bg);">
+  <div style="width:100%;max-width:620px;">
     <div class="step-eyebrow anim-fadeup" style="color:var(--enea);">— Eneagrama · Tu momento actual</div>
     <h2 class="section-title anim-fadeup-2">¿En qué momento<br>estás hoy?</h2>
     <p class="section-sub anim-fadeup-3">Elegí la opción que mejor describe tu situación. Esto nos ayuda a personalizar mejor tu resultado.</p>
@@ -533,14 +533,14 @@ body::after { content: ''; position: fixed; inset: 0; background-image: url("dat
   <div class="datos-wrap" style="max-width:480px;text-align:center;">
     <div class="step-eyebrow anim-fadeup" style="text-align:center;">— Tu resultado está listo</div>
     <h2 class="section-title anim-fadeup-2" style="text-align:center;">¡Ya terminaste!</h2>
-    <p class="section-sub anim-fadeup-3" style="text-align:center;">Suscribite para recibir contenido sobre desarrollo profesional de parte de Espacio BrOD. Es opcional — podés saltearlo si preferís.</p>
+    <p class="section-sub anim-fadeup-3" style="text-align:center;">Dejá tu email y te avisamos cuando lancemos nuevas herramientas y talleres de BrOD.</p>
     <div style="display:flex;flex-direction:column;gap:14px;margin-bottom:24px;" class="anim-fadeup-3">
       <div class="form-group"><label class="form-label">Tu correo electrónico</label><input class="form-input" id="f-email" type="email" placeholder="tu@email.com"></div>
       <div id="email-error" style="display:none;font-size:12px;color:var(--danger);background:#fef2f2;padding:10px 14px;border-left:3px solid var(--danger);">Por favor ingresá tu correo para suscribirte.</div>
     </div>
     <div style="display:flex;flex-direction:column;gap:12px;align-items:center;" class="anim-fadeup-4">
       <button class="btn-primary" style="width:100%;" onclick="guardarEmailYMostrar()">Suscribirme y ver mi resultado →</button>
-      <button class="btn-secondary" style="width:100%;" onclick="saltearEmail()">Ver mi resultado sin suscribirme</button>
+      
     </div>
   </div>
 </div>
